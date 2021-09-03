@@ -1,0 +1,47 @@
+@media(min-width: 0px) and (max-width: 1199px){
+    .bd-example {
+        height: 350px;
+    }
+}
+@media (min-width: 1200px){
+    .bd-example {
+        height: 550px;
+    }
+}
+.news{
+    margin-top: 0px;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 100%
+}
+.title {
+    color: #00ff00;
+    font-family: 'Georgia',serif;
+}
+.bd-example {
+    position: relative;
+    padding: 0rem;
+    margin: 0rem - 0rem 0;
+    border: solid #dee2e6;
+    border-width: 1px 0 0;
+}
+.first_buttons {
+    top: 85px;
+    background-color: #7fdbd8;
+    border-radius: 25px;
+    width: 270px;
+    height: 55px;
+
+}
+text{
+    color: #1111da;
+    font-size: 44px;
+    font-family: 'Georgia',serif;
+    line-height: 1.5;
+    font-weight: 600;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+}
