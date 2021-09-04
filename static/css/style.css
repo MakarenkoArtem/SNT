@@ -1,9 +1,29 @@
 @media(min-width: 0px) and (max-width: 1199px){
+    .first_buttons {
+        font-size: 14pt;
+        top: 50px;
+        width: 150px;
+        height: 50px;
+    }
+    .title {
+        font-size: 24pt;
+        top: 150px;
+    }
     .bd-example {
         height: 350px;
     }
 }
 @media (min-width: 1200px){
+    .first_buttons {
+        font-size: 18pt;
+        top: 85px;
+        width: 270px;
+        height: 55px;
+    }
+    .title {
+        font-size: 33pt;
+        top: 200px;
+    }
     .bd-example {
         height: 550px;
     }
@@ -19,6 +39,8 @@
 .title {
     color: #00ff00;
     font-family: 'Georgia',serif;
+    left: 10%;
+    position: relative;
 }
 .bd-example {
     position: relative;
@@ -28,12 +50,15 @@
     border-width: 1px 0 0;
 }
 .first_buttons {
-    top: 85px;
-    background-color: #7fdbd8;
+    background-color: #7fdbac;
     border-radius: 25px;
-    width: 270px;
-    height: 55px;
-
+    position: relative;
+    margin: 5px;
+    color: #69685a;
+    font-family: 'Arial',Arial,sans-serif;
+    line-height: 0;
+    font-weight: 600;
+    border-width: 2px;
 }
 text{
     color: #1111da;
