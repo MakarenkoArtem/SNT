@@ -1,4 +1,27 @@
-@media(min-width: 0px) and (max-width: 1199px){
+@media(min-width: 0px) and (max-width: 749px){
+    .news{
+        width: 85%;
+    }
+    .first_buttons {
+        font-size: 14pt;
+        top: 40px;
+        width: 150px;
+        height: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .title {
+        font-size: 20pt;
+        top: 50px;
+    }
+    .top-img {
+        height: 200px;
+    }
+}
+@media(min-width: 750px) and (max-width: 1199px){
+    .news{
+        width: 65%;
+    }
     .first_buttons {
         font-size: 14pt;
         top: 50px;
@@ -9,11 +32,14 @@
         font-size: 24pt;
         top: 150px;
     }
-    .bd-example {
+    .top-img {
         height: 350px;
     }
 }
 @media (min-width: 1200px){
+    .news{
+        width: 800px;
+    }
     .first_buttons {
         font-size: 18pt;
         top: 85px;
@@ -24,11 +50,22 @@
         font-size: 33pt;
         top: 200px;
     }
-    .bd-example {
+    .top-img {
         height: 550px;
     }
 }
-.news{
+.news {
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: 1px;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    position: relative;
+    border: solid #dee2e6;
+    float: center;
+}
+.main{
     margin-top: 0px;
     background-position: center center;
     background-attachment: scroll;
@@ -37,15 +74,15 @@
     background-size: 100%
 }
 .title {
-    color: #00ff00;
     font-family: 'Georgia',serif;
     left: 10%;
     position: relative;
 }
-.bd-example {
+
+.top-img {
     position: relative;
     padding: 0rem;
-    margin: 0rem - 0rem 0;
+    margin: 0rem -0rem 0;
     border: solid #dee2e6;
     border-width: 1px 0 0;
 }
