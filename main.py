@@ -20,7 +20,6 @@ def main():
         app.run(host='0.0.0.0', port=port)
     else:
         app.run(port=8080, host='127.0.0.1', debug=False)
-    rmdir("static/img/top_images")
 
 
 if __name__ == "__main__":

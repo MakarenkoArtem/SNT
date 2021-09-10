@@ -2,6 +2,9 @@
     .news{
         width: 85%;
     }
+    .text{
+        width: 90%;
+    }
     .first_buttons {
         font-size: 10pt;
         top: 40px;
@@ -24,6 +27,9 @@
     .news{
         width: 65%;
     }
+    .text{
+        width: 70%;
+    }
     .first_buttons {
         font-size: 14pt;
         top: 50px;
@@ -45,6 +51,9 @@
 @media (min-width: 1200px){
     .news{
         width: 800px;
+    }
+    .text{
+        width: 900px;
     }
     .first_buttons {
         font-size: 18pt;
@@ -105,8 +114,8 @@
     font-weight: 600;
     border-width: 2px;
 }
-text{
-    color: #1111da;
+.text{
+    color: #6c757d;
     font-size: 44px;
     font-family: 'Georgia',serif;
     line-height: 1.5;
@@ -115,7 +124,6 @@ text{
     border-color: transparent;
     border-style: solid;
 }
-
 
 
 
