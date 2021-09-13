@@ -34,10 +34,10 @@
 <div class="top-img"
      style="background-image: url(/static/img/forest.jpeg)">
     <div align="center">
-        <button type="button" class="btn first_buttons">новости</button>
-        <button type="button" class="btn first_buttons">документы</button>
-        <button type="button" class="btn first_buttons">оплата</button>
-        <button type="button" class="btn first_buttons">контакты</button>
+        <a href="#news"><button type="button" class="btn first_buttons">новости</button></a>
+        <a href="#docs"><button type="button" class="btn first_buttons">документы</button></a>
+        <a href="#pays"><button type="button" class="btn first_buttons">оплата</button></a>
+        <a href="#cont"><button type="button" class="btn first_buttons">контакты</button></a>
     </div>
     <div align="center">
         <h1 align="center" class="title" style="color: #00ff00;">СНТ<br> Какой-то</h1>
@@ -51,11 +51,9 @@
      data-artboard-proxy-min-height="550" data-artboard-proxy-max-height="550" style="background-image: url(/static/img/list.jpg); background-size: 100%;"-->
 
 
-
-
 <div class="main" style="background-color: #ebf5f4" align="center">
     <br>
-    <h1 align="center" class="text">Доска объявлений</h1><br>
+    <h1 align="center" class="text" id="news">Доска объявлений</h1><br>
     <div class="news">
         <h2 align="center">Уважаемые садоводы!<br>
             Очередное отчётно-выборное общее собрание
@@ -63,7 +61,8 @@
         <h3>Повестка дня собрания:</h3>
     </div>
     <br><br><br>
-    <div class="text" align="center"><h1 align="center">Отчет Правления, отчет Ревизионной комиссии, отчет об исполнении сметы за 2020-2021 год</h1>
+    <div class="text" align="center"><h1 align="center">Отчет Правления, отчет Ревизионной комиссии,
+        отчет об исполнении сметы за 2020-2021 год</h1>
     </div>
     <br><br><br>
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -78,114 +77,141 @@
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
                 <img class="test" src="{{ url_for('static', filename='img/text.jpg') }}"
-                     width="75%" height="600px">
+                     height="600px">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
+                    <!--p>Some representative placeholder content for the first slide.</p-->
                 </div>
             </div>
             <div class="carousel-item" data-bs-interval="2000">
                 <img class="test" src="{{ url_for('static', filename='img/text.jpg') }}"
-                     width="75%" height="600px">
+                     height="600px">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
+                    <!--p>Some representative placeholder content for the second slide.</p-->
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="test" src="{{ url_for('static', filename='img/forest.jpeg') }}"
-                     width="75%" height="600px">
+                     height="600px">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
+                    <!--p>Some representative placeholder content for the third slide.</p-->
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    <br><br><br>
+    <div class="text" align="center" id="docs"><h1 align="center">Документы СНТ</h1>
+    </div>
+    <img class="doc-img" src="{{ url_for('static', filename='img/text.jpg') }}">
+    <img class="doc-img" src="{{ url_for('static', filename='img/text.jpg') }}">
+    <br><br><br>
+    <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1>
+        <table width="100%">
+            <td width="50%">
+                <img class="img" src="{{ url_for('static', filename='img/text.jpg') }}" width="100%">
+            </td>
+            <td><h2 style="margin-left: 25px;" align="top">Уважаемые садоводы! Обращаем Ваше внимание
+                что с 01.01.2021 года все платежи в СНТ осуществляются только безналичным способом на
+                расчетный счет СНТ.</h2></td>
+        </table>
     </div>
     <br><br><br>
-    <div class="text" align="center"><h1 align="center">Документы СНТ</h1>
+    <div class="text" align="center"><h1 align="center">Долги по оплате членских взносов</h1>
+        <img class="img" src="{{ url_for('static', filename='img/text.jpg') }}" width="100%"></td>
     </div>
-        <img class="doc-img" src="{{ url_for('static', filename='img/text.jpg') }}">
-        <img class="doc-img" src="{{ url_for('static', filename='img/text.jpg') }}">
-    <br>
-</div>
-<div class="button-group">
-    <button class="button" data-group="cell1">1984 to 1988 (Cell 1)</button>
-    <button class="button is-selected" data-group="cell2">1989-1992 (Cell 2)</button>
-    <button class="button" data-group="cell3">1993-1999 (Cell 3)</button>
-    <button class="button" data-group="cell4">2000-2002 (Cell 4)</button>
-    <button class="button" data-group="cell5">2003-2005 (Cell 5)</button>
-</div>
-<div class="carousel flickity-enabled is-draggable" tabindex="0">
+    <br><br><br>
+    <div class="text" align="center" id="cont"><h1 align="center">Долги по оплате членских взносов</h1><br>
+        <table width="100%">
+            <td width="33%">
+                <h3>ПРЕДСЕДАТЕЛЬ</h3>
+            </td>
+            <td width="33%">
+                <h3>БУХГАЛТЕР</h3>
+            </td>
+            <td width="33%">
+                <h3>КОМЕНДАНТ</h3>
+            </td>
+        </table>
+    </div>
+    <!--div class="button-group">
+        <button class="button" data-group="cell1">1984 to 1988 (Cell 1)</button>
+        <button class="button is-selected" data-group="cell2">1989-1992 (Cell 2)</button>
+        <button class="button" data-group="cell3">1993-1999 (Cell 3)</button>
+        <button class="button" data-group="cell4">2000-2002 (Cell 4)</button>
+        <button class="button" data-group="cell5">2003-2005 (Cell 5)</button>
+    </div>
+    <div class="carousel flickity-enabled is-draggable" tabindex="0">
 
 
-    <div class="flickity-viewport" style="height: 200px; touch-action: pan-y;">
-        <div class="flickity-slider" style="left: 0px; transform: translateX(-183.06%);">
-            <div class="carousel-cell" data-group="cell1" style="position: absolute; left: 0%;"
-                 aria-hidden="true"></div>
-            <div class="carousel-cell" data-group="cell1" aria-hidden="true"
-                 style="position: absolute; left: 66.69%;"></div>
-            <div class="carousel-cell" data-group="cell2" style="position: absolute; left: 133.37%;"
-                 aria-hidden="true"></div>
-            <div class="carousel-cell is-selected" data-group="cell2"
-                 style="position: absolute; left: 200.06%;"></div>
-            <div class="carousel-cell" data-group="cell3" aria-hidden="true"
-                 style="position: absolute; left: 266.75%;"></div>
-            <div class="carousel-cell" data-group="cell3" aria-hidden="true"
-                 style="position: absolute; left: 333.44%;"></div>
-            <div class="carousel-cell" data-group="cell4" aria-hidden="true"
-                 style="position: absolute; left: 400.12%;"></div>
-            <div class="carousel-cell" data-group="cell4" aria-hidden="true"
-                 style="position: absolute; left: 466.81%;"></div>
-            <div class="carousel-cell" data-group="cell5" aria-hidden="true"
-                 style="position: absolute; left: 533.5%;"></div>
-            <div class="carousel-cell" data-group="cell5" aria-hidden="true"
-                 style="position: absolute; left: 600.18%;"></div>
+        <div class="flickity-viewport" style="height: 200px; touch-action: pan-y;">
+            <div class="flickity-slider" style="left: 0px; transform: translateX(-183.06%);">
+                <div class="carousel-cell" data-group="cell1" style="position: absolute; left: 0%;"
+                     aria-hidden="true"></div>
+                <div class="carousel-cell" data-group="cell1" aria-hidden="true"
+                     style="position: absolute; left: 66.69%;"></div>
+                <div class="carousel-cell" data-group="cell2" style="position: absolute; left: 133.37%;"
+                     aria-hidden="true"></div>
+                <div class="carousel-cell is-selected" data-group="cell2"
+                     style="position: absolute; left: 200.06%;"></div>
+                <div class="carousel-cell" data-group="cell3" aria-hidden="true"
+                     style="position: absolute; left: 266.75%;"></div>
+                <div class="carousel-cell" data-group="cell3" aria-hidden="true"
+                     style="position: absolute; left: 333.44%;"></div>
+                <div class="carousel-cell" data-group="cell4" aria-hidden="true"
+                     style="position: absolute; left: 400.12%;"></div>
+                <div class="carousel-cell" data-group="cell4" aria-hidden="true"
+                     style="position: absolute; left: 466.81%;"></div>
+                <div class="carousel-cell" data-group="cell5" aria-hidden="true"
+                     style="position: absolute; left: 533.5%;"></div>
+                <div class="carousel-cell" data-group="cell5" aria-hidden="true"
+                     style="position: absolute; left: 600.18%;"></div>
+            </div>
         </div>
-    </div>
-    <button class="flickity-button flickity-prev-next-button previous" type="button"
-            aria-label="Previous">
-        <svg class="flickity-button-icon" viewBox="0 0 100 100">
-            <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path>
-        </svg>
-    </button>
-    <button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next">
-        <svg class="flickity-button-icon" viewBox="0 0 100 100">
-            <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"
-                  transform="translate(100, 100) rotate(180) "></path>
-        </svg>
-    </button>
-    <ol class="flickity-page-dots">
-        <li class="dot" aria-label="Page dot 1"></li>
-        <li class="dot" aria-label="Page dot 2"></li>
-        <li class="dot" aria-label="Page dot 3"></li>
-        <li class="dot is-selected" aria-label="Page dot 4" aria-current="step"></li>
-        <li class="dot" aria-label="Page dot 5"></li>
-        <li class="dot" aria-label="Page dot 6"></li>
-        <li class="dot" aria-label="Page dot 7"></li>
-        <li class="dot" aria-label="Page dot 8"></li>
-        <li class="dot" aria-label="Page dot 9"></li>
-        <li class="dot" aria-label="Page dot 10"></li>
-    </ol>
-</div>
-<script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-<!--div class="container" top="0px" height="100%" width="100%">
-    <p height="300" width="300">
-        <img src="{{ url_for('static', filename='img/nature.gif') }}" wight="100%"></p>
-    <<div> class="shadow-lg p-3 mb-5 bg-body rounded" >
+        <button class="flickity-button flickity-prev-next-button previous" type="button"
+                aria-label="Previous">
+            <svg class="flickity-button-icon" viewBox="0 0 100 100">
+                <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path>
+            </svg>
+        </button>
+        <button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next">
+            <svg class="flickity-button-icon" viewBox="0 0 100 100">
+                <path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"
+                      transform="translate(100, 100) rotate(180) "></path>
+            </svg>
+        </button>
+        <ol class="flickity-page-dots">
+            <li class="dot" aria-label="Page dot 1"></li>
+            <li class="dot" aria-label="Page dot 2"></li>
+            <li class="dot" aria-label="Page dot 3"></li>
+            <li class="dot is-selected" aria-label="Page dot 4" aria-current="step"></li>
+            <li class="dot" aria-label="Page dot 5"></li>
+            <li class="dot" aria-label="Page dot 6"></li>
+            <li class="dot" aria-label="Page dot 7"></li>
+            <li class="dot" aria-label="Page dot 8"></li>
+            <li class="dot" aria-label="Page dot 9"></li>
+            <li class="dot" aria-label="Page dot 10"></li>
+        </ol>
+    </div-->
+    <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!--div class="container" top="0px" height="100%" width="100%">
+        <p height="300" width="300">
+            <img src="{{ url_for('static', filename='img/nature.gif') }}" wight="100%"></p>
+        <<div> class="shadow-lg p-3 mb-5 bg-body rounded" >
 
-</div-->
+    </div-->
 </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </html>

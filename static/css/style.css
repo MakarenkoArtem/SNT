@@ -1,4 +1,7 @@
 @media(min-width: 0px) and (max-width: 749px){
+    .test_off{
+        width: 100%;
+    }
     .news{
         width: 85%;
     }
@@ -31,6 +34,9 @@
     }
 }
 @media(min-width: 750px) and (max-width: 1199px){
+    .test_off{
+        width: 90%;
+    }
     .news{
         width: 65%;
     }
@@ -63,6 +69,9 @@
     }
 }
 @media (min-width: 1200px){
+    .test_off{
+        width: 35%;
+    }
     .news{
         width: 800px;
     }
@@ -137,6 +146,10 @@
     font-weight: 600;
     border-width: 2px;
 }
+a{
+    text-decoration: none;
+    background-color: transparent;
+}
 .text{
     color: #6c757d;
     font-size: 44px;
@@ -147,18 +160,19 @@
     border-color: transparent;
     border-style: solid;
 }
+.flickity-prev-next-button.previous {
+    left: 9%;
+}
+.flickity-prev-next-button.next {
+    right: 9%;
+}
 
 
 
 
 
 
-
-
-
-
-
-/* external css: flickity.css */
+/* external css: flickity.css
 
 * { box-sizing: border-box; }
 
@@ -175,9 +189,9 @@ body { font-family: sans-serif; }
   background: #8C8;
   border-radius: 5px;
   counter-increment: carousel-cell;
-}
+}*/
 
-/* cell number */
+/* cell number
 .carousel-cell:before {
   display: block;
   text-align: center;
@@ -189,13 +203,8 @@ body { font-family: sans-serif; }
 
 .button {
   font-size: 22px;
-  background: #DDD;
-}
-
-.button.is-selected {
-  background: #19F;
-  color: white;
 }
 
 .button-group {
   margin-bottom: 20px;
+}*/

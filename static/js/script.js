@@ -9,18 +9,6 @@ buttonGroup.addEventListener( 'click', function( event ) {
   if ( !matchesSelector( event.target, '.button' ) ) {
     return;
   }
-  let group = event.target.dataset.group;
-  flkty.selectCell(`[data-group="${group}"]`);
+  var selector = event.target.getAttribute('data-selector');
+  flkty.selectCell( selector );
 });
-
-let selectedNavButton = buttonGroup.querySelector('.is-selected');
-
-flkty.on( 'change', function() {
-  let group = flkty.selectedElement.dataset.group;
-  let navButton = buttonGroup.querySelector(`[data-group="${group}"]`);
-  if ( navButton != selectedNavButton ) {
-    selectedNavButton.classList.remove('is-selected');
-    navButton.classList.add('is-selected');
-    selectedNavButton = navButton;
-  }
-})

@@ -6,7 +6,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = datetime.timedelta(days=1)
 app.config['SECRET_KEY'] = 'secret_key'
 @app.route('/')
 def main_list():  # форма для регистрации
-    return render_template('index.html')
+    return render_template('base.html')
 
 
 def main():
