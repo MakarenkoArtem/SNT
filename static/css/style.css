@@ -160,10 +160,10 @@ a{
     border-color: transparent;
     border-style: solid;
 }
-.flickity-prev-next-button.previous {
+.1flickity-prev-next-button.previous {
     left: 9%;
 }
-.flickity-prev-next-button.next {
+.1flickity-prev-next-button.next {
     right: 9%;
 }
 
