@@ -2,8 +2,17 @@
     .test_off{
         width: 100%;
     }
+    .prof{
+        margin-left: 200px;
+    }
+    .prof-text{
+        margin-left: 200px;
+    }
     .news{
         width: 85%;
+    }
+    .test{
+        height: 300px
     }
     .text{
         width: 90%;
@@ -13,8 +22,8 @@
         top: 40px;
         width: 150px;
         height: 40px;
-        margin-left: 200px;
-        margin-right: 200px;
+        /*margin-left: 50%;*/
+        margin-right: 35%;
         margin-top: 5px;
     }
     .title {
@@ -27,8 +36,8 @@
     }
     .doc-img {
         width: 24%;
-        margin-left: 200px;
-        margin-right: 200px;
+        margin-left: 100px;
+        margin-right: 100px;
         margin-top: 5px;
         margin-bottom: 5px;
     }
@@ -37,8 +46,14 @@
     .test_off{
         width: 90%;
     }
+    .prof{
+        margin-left: 5px;
+    }
     .news{
         width: 65%;
+    }
+    .test{
+        height: 450px
     }
     .text{
         width: 70%;
@@ -72,8 +87,14 @@
     .test_off{
         width: 35%;
     }
+    .prof{
+        margin-left: 5px;
+    }
     .news{
         width: 800px;
+    }
+    .test{
+        height: 600px
     }
     .text{
         width: 900px;
@@ -122,6 +143,7 @@
     background-size: 100%
 }
 .title {
+    width: 60%;
     font-family: 'Georgia',serif;
     left: 10%;
     position: relative;
