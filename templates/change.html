@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>SNT</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+            crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!---style type="text/css">
+     body {
+      background-image: url(/static/img/nature.gif); /* Путь к фоновому рисунку */
+      background-position: left bottom; /* Положение фона */
+      background-repeat: no-repeat; /* Повторяем фон по горизонтали */
+      background-size: 100%;
+     }
+    </style-->
+    <!--meta name="viewport" content="width=device-width">
+    <link rel='stylesheet' href='https://npmcdn.com/flickity@2/dist/flickity.css'>
+    <link rel="stylesheet" href="/static/css/style.css"-->
+
+</head>
+<body>
+<div class="container">
+    <form action="" method="post" style="colot: #0044ff" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {% if err %}
+        <div class="alert alert-danger" role="alert"><h2 align="right"><font color="red">{{ err
+            }}</font></h2></div>
+        {% endif %}
+        <p>
+            {{ form.text.label }}<br>
+            {{ form.text(class="form-control") }}<br>
+            {% for error in form.text.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.images.label }}<br>
+            {{ form.images(class="form-control-file") }}<br>
+            {% for error in form.images.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.docs_image.label }}<br>
+            {{ form.docs_image(class="form-control-file") }}<br>
+            {% for error in form.docs_image.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.oplata_image.label }}<br>
+            {{ form.oplata_image(class="form-control-file") }}<br>
+            {% for error in form.oplata_image.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.oplata_text.label }}<br>
+            {{ form.oplata_text(class="form-control") }}<br>
+            {% for error in form.oplata_text.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.dolgi_image.label }}<br>
+            {{ form.dolgi_image(class="form-control-file") }}<br>
+            {% for error in form.dolgi_image.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p>
+        <a href="/weblearn/page={{ id }}" style="float: left;" class="btn btn-danger">Назад
+        </a>
+        <p align="right">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </form>
+</div>
+</body>
+</html>
