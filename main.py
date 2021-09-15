@@ -14,7 +14,6 @@ app.config['SECRET_KEY'] = 'secret_key'
 @app.route('/')
 def main_list():  # форма для регистрации
     db_sess = db_session.create_session()
-    print(db_sess.query(Site).all())
     try:
         site = db_sess.query(Site).filter(Site.id == 1).one()
     except sqlalchemy.exc.NoResultFound:

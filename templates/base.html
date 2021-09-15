@@ -76,7 +76,7 @@
     <div class="text" align="center"><h1 align="center">Отчет Правления, отчет Ревизионной комиссии,
         отчет об исполнении сметы за 2020-2021 год</h1>
     </div>
-    <br><br><br><br>
+    <br><br>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             {% for image in images %}
@@ -108,12 +108,12 @@
     </div>
     <br><br>
     <div class="text" align="center" id="docs"><h1 align="center">Документы СНТ</h1>
-    </div>
+    </div><br>
     {% for image in docs_image %}
     <img class="doc-img" src="static/img/{{ image }}.png">
     {% endfor %}
     <br><br><br>
-    <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1>
+    <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1><br>
         <table width="100%">
             <td width="50%">
                 <img class="img" src="static/img/{{ oplata_image }}.png" width="100%">
@@ -122,7 +122,7 @@
         </table>
     </div>
     <br><br><br>
-    <div class="text" align="center"><h1 align="center">Долги по оплате членских взносов</h1>
+    <div class="text" align="center"><h1 align="center">Долги по оплате членских взносов</h1><br>
         <img class="img" src="static/img/{{ dolgi_image }}.png" width="100%"></td>
     </div>
     <br><br><br>
