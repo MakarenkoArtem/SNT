@@ -4,7 +4,6 @@ import sqlalchemy
 from forms.site import SiteForm
 from data.site import Site
 from data import db_session
-from data.image import Image
 from os import listdir, remove, rmdir, mkdir, environ
 
 app = Flask(__name__)
@@ -32,6 +31,7 @@ def add():  # форма для добавления теста
             site = Site(id=1)
             db_sess.add(site)
         finally:
+            [remove("static/img/" + i) for i in listdir("static/img") if i not in ['forest.jpg', "hello.gif", "nature.gif", "text.jpg"]]
             num_img = 1
             site.text = form.text.data
             nums_img = []
