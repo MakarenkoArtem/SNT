@@ -14,7 +14,12 @@ app.config['SECRET_KEY'] = 'secret_key'
 @app.route('/')
 def main_list():  # форма для регистрации
     db_sess = db_session.create_session()
-    site = db_sess.query(Site).filter(Site.id == 1).one()
+    try:
+        site = db_sess.query(Site).filter(Site.id == 1).one()
+    except sqlalchemy.exc.NoResultFound:
+        return redirect('/change')
+    except sqlalchemy.orm.exc.NoResultFound:
+        return redirect('/change')
     return render_template('base.html', text=site.text.split("\n"), images=site.images.split(','),
                            docs_image=site.docs_image.split(','), oplata_image=site.oplata_image,
                            oplata_text=site.oplata_text, dolgi_image=site.dolgi_image)
@@ -31,10 +36,6 @@ def add():  # форма для добавления теста
             site = Site(id=1)
             db_sess.add(site)
         except sqlalchemy.orm.exc.NoResultFound:
-            site = Site(id=1)
-            db_sess.add(site)
-        except BaseException as e:
-            print(e.__name__)
             site = Site(id=1)
             db_sess.add(site)
         finally:
