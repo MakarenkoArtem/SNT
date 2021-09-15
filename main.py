@@ -27,10 +27,14 @@ def add():  # форма для добавления теста
     if form.validate_on_submit():
         try:
             site = db_sess.query(Site).filter(Site.id == 1).one()
+        except sqlalchemy.exc.NoResultFound:
+            site = Site(id=1)
+            db_sess.add(site)
         except sqlalchemy.orm.exc.NoResultFound:
             site = Site(id=1)
             db_sess.add(site)
-        except sqlalchemy.exc.NoResultFound:
+        except BaseException as e:
+            print(e.__name__)
             site = Site(id=1)
             db_sess.add(site)
         finally:
