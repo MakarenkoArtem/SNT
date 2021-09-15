@@ -30,6 +30,9 @@ def add():  # форма для добавления теста
         except sqlalchemy.orm.exc.NoResultFound:
             site = Site(id=1)
             db_sess.add(site)
+        except sqlalchemy.exc.NoResultFound:
+            site = Site(id=1)
+            db_sess.add(site)
         finally:
             [remove("static/img/" + i) for i in listdir("static/img") if i not in ['forest.jpg', "hello.gif", "nature.gif", "text.jpg"]]
             num_img = 1
