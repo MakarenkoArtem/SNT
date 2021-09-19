@@ -69,7 +69,12 @@
             членов СНТ</h2>
         <h3>Повестка дня собрания:</h3>
         {% for ph in text %}
-        <h3 align="left">{{ ph }}</h3>
+            <h3 align="left">
+        {% if ph.znach %}
+                <div class="alert alert-danger" role="alert"><span style="color:#FF0000">!</span> {{ ph.text }}</div>
+        {% else %}
+                <div class="alert alert-primary" role="alert">  {{ ph.text }}</div>
+        {% endif %}</h3>
         {% endfor %}
     </div>
     <br><br><br>

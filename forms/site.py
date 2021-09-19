@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 
 
 class SiteForm(FlaskForm):
-    text = TextAreaField('Повестка дня собрания:', validators=[DataRequired()])
+    #text = TextAreaField('Повестка дня собрания:', validators=[DataRequired()])
     images = MultipleFileField('Отчет Правления:',
                                validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
     docs_image = MultipleFileField('Документы СНТ:',

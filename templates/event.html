@@ -39,44 +39,20 @@
             }}</font></h2></div>
         {% endif %}
         <p>
-            {{ form.images.label }}<br>
-            {{ form.images(class="form-control-file") }}<br>
-            {% for error in form.images.errors %}
+            {{ form.text.label }}<br>
+            {{ form.text(class="form-control") }}<br>
+            {% for error in form.text.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}
         </p>
         <p>
-            {{ form.docs_image.label }}<br>
-            {{ form.docs_image(class="form-control-file") }}<br>
-            {% for error in form.docs_image.errors %}
+            {{ form.znach.label }}
+            {{ form.znach(class="form") }}
+            {% for error in form.znach.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.oplata_image.label }}<br>
-            {{ form.oplata_image(class="form-control-file") }}<br>
-            {% for error in form.oplata_image.errors %}
-        <p class="alert alert-danger" role="alert">
-            {{ error }}
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.oplata_text.label }}<br>
-            {{ form.oplata_text(class="form-control") }}<br>
-            {% for error in form.oplata_text.errors %}
-        <p class="alert alert-danger" role="alert">
-            {{ error }}
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.dolgi_image.label }}<br>
-            {{ form.dolgi_image(class="form-control-file") }}<br>
-            {% for error in form.dolgi_image.errors %}
-        <p class="alert alert-danger" role="alert">
-            {{ error }}
-            {% endfor %}
+        {% endfor %}
         </p>
         <a href="/" style="float: left;" class="btn btn-danger">Назад
         </a>
