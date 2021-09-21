@@ -35,7 +35,7 @@ def verify_password(username, password):
     user = db_sess.query(User).filter(
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
-        user[0].date = datetime.datetime.now()
+        #user[0].date = datetime.datetime.now()
         login_user(user[0], remember=True)
         db_sess.commit()
         return user[0]
