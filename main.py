@@ -169,10 +169,10 @@ def event():  # форма для добавления теста
         try:
             site = db_sess.query(Site).filter(Site.id == 1).one()
         except sqlalchemy.exc.NoResultFound:
-            site = Site(id=1)
+            site = Site(id=1, text="")
             db_sess.add(site)
         except sqlalchemy.orm.exc.NoResultFound:
-            site = Site(id=1)
+            site = Site(id=1, text="")
             db_sess.add(site)
         finally:
             print([int(i[6:].split(".")[0]) for i in listdir("static/img") if i.startswith("event_")])
