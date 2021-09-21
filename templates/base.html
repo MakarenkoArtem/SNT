@@ -71,10 +71,25 @@
         {% for ph in text %}
             <h3 align="left">
         {% if ph.znach %}
-                <div class="alert alert-danger" role="alert"><span style="color:#FF0000">!</span> {{ ph.text }}</div>
+                <div class="alert alert-danger" role="alert"><span style="color:#FF0000">! </span>
         {% else %}
-                <div class="alert alert-primary" role="alert">  {{ ph.text }}</div>
-        {% endif %}</h3>
+                <div class="alert alert-primary" role="alert">
+        {% endif %}
+                    {{ ph.text }}
+                {% if admin %}
+                    {% if event_del == ph.id %}
+                        <div style="float: right; position: relative;"><a
+                                href="/del/{{ ph.id }}"
+                                class="btn btn-danger">Точно удалить</a></div>
+                        <div style="float: right; position: relative; margin-right: 5px"><a
+                                href="/"
+                                class="btn btn-primary">Отмена</a></div>
+                    {% else %}
+                    <div style="float: right; position: relative;"><a
+                                href="/{{ ph.id }}"
+                                class="btn btn-danger">Удалить</a></div>
+                    {% endif %}
+                {% endif %}</div></h3>
         {% endfor %}
     </div>
     <br><br><br>
