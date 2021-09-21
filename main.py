@@ -36,7 +36,9 @@ def verify_password(username, password):
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
         #user[0].date = datetime.datetime.now()
-        login_user(user[0], remember=True)
+        print(current_user)
+        if current_user is None:
+            login_user(user[0], remember=True)
         db_sess.commit()
         return user[0]
     '''
@@ -89,9 +91,10 @@ def main_list(event=-1):  # форма для регистрации
 @app.route('/change', methods=['GET', 'POST'])
 @auth.login_required
 def add():  # форма для добавления теста
-    print(current_user)
-    print("name:", current_user.name)
-    print("name:", auth.current_user().name)
+    try:
+        print("name:", current_user.name)
+    except AttributeError:
+        pass
     db_sess = db_session.create_session()
     form = SiteForm()
     if form.validate_on_submit():
@@ -155,6 +158,10 @@ def add():  # форма для добавления теста
 @app.route('/event', methods=['GET', 'POST'])
 @auth.login_required
 def event():  # форма для добавления теста
+    try:
+        print("name:", current_user.name)
+    except AttributeError:
+        pass
     db_sess = db_session.create_session()
     form = EventForm()
     if form.validate_on_submit():
@@ -199,7 +206,6 @@ def main():
     # users = {user.name: user.hashed_password for user in db_sess.query(User).all()}
     if 'HEROKU' in environ:
         port = int(environ.get("PORT", 5000))
-        print(port)
         app.run(host='0.0.0.0', port=port)
     else:
         app.run(port=8080, host='127.0.0.1', debug=False)
