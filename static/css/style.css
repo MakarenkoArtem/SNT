@@ -1,4 +1,10 @@
 @media(min-width: 0px) and (max-width: 749px){
+    .alert {
+      min-height: 80px;
+    }
+    .imag{
+      max-height: 6vh;
+    }
     .test_off{
         width: 100%;
     }
@@ -43,6 +49,12 @@
     }
 }
 @media(min-width: 750px) and (max-width: 1199px){
+    .alert {
+      min-height: 90px;
+    }
+    .imag{
+      max-height: 6.5vh;
+    }
     .test_off{
         width: 90%;
     }
@@ -84,6 +96,12 @@
     }
 }
 @media (min-width: 1200px){
+    .alert {
+      min-height: 95px;
+    }
+    .imag{
+      max-height: 7vh;
+    }
     .test_off{
         width: 35%;
     }
@@ -197,6 +215,54 @@ textarea.form-control{
 }
 
 
+
+
+/*img {
+  max-height: 90vh;
+}*/
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: #bbb;
+}
+.lightbox {
+  /* Default to hidden */
+  display: none;
+
+  /* Overlay entire screen */
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* A bit of padding around image */
+  padding: 1em;
+
+  /* Translucent background */
+  background: rgba(0, 0, 0, 0.8);
+}
+
+
+.lightbox:target {
+  display: block;
+}
+
+.lightbox span {
+  /* Full width and height */
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* Size and position background image */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 
 /* external css: flickity.css

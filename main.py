@@ -82,8 +82,9 @@ def main_list(event=-1):  # форма для регистрации
             pass
     site.text = ", ".join(s)
     db_sess.commit()
+    print([i.images.split(", ") for i in text])
     return render_template('base.html', event_del=event, admin=admin,
-                           text=text,  images=site.images.split(','),
+                           text=text, event_images=[i.images.split(", ")[:3] for i in text],  images=site.images.split(','),
                            docs_image=site.docs_image.split(','), oplata_image=site.oplata_image,
                            oplata_text=site.oplata_text, dolgi_image=site.dolgi_image)
 
@@ -108,7 +109,7 @@ def add():  # форма для добавления теста
             db_sess.add(site)
         finally:
             [remove("static/img/" + i) for i in listdir("static/img") if
-             i not in ['forest.jpg', "hello.gif", "nature.gif", "text.jpg"]]
+             i not in ['forest.jpg', "hello.gif", "nature.gif", "text.jpg"] and not i.startswith("event_")]
             num_img = 1
             # site.text = form.text.data
             nums_img = []
@@ -174,7 +175,18 @@ def event():  # форма для добавления теста
             site = Site(id=1)
             db_sess.add(site)
         finally:
-            event = Event(text=form.text.data, znach=form.znach.data)
+            print([int(i[6:].split(".")[0]) for i in listdir("static/img") if i.startswith("event_")])
+            num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if i.startswith("event_")] + [1])
+            nums_img = []
+            for i in form.images.data:
+                image = i.read()
+                if image == b'':
+                    continue
+                nums_img.append(str(num_img))
+                with open(f'static/img/event_{num_img}.png', 'wb') as file:
+                    file.write(image)
+                num_img += 1
+            event = Event(text=form.text.data, images=", ".join(nums_img), znach=form.znach.data)
             db_sess.add(event)
             db_sess.commit()
             site.text = ", ".join(site.text.split(", ") + [str(event.id)])

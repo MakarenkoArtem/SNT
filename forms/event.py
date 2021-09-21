@@ -7,5 +7,7 @@ from wtforms.validators import DataRequired
 class EventForm(FlaskForm):
     text = TextAreaField('Событие:', validators=[DataRequired()])
     znach = BooleanField('Важное событие')
+    images = MultipleFileField('Отчет Правления:',
+                               validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
     submit = SubmitField('Сохранить')
 # multiple

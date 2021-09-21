@@ -47,6 +47,14 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.images.label }}
+            {{ form.images(class="form") }}
+            {% for error in form.images.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        {% endfor %}
+        </p>
+        <p>
             {{ form.znach.label }}
             {{ form.znach(class="form") }}
             {% for error in form.znach.errors %}
