@@ -89,6 +89,7 @@ def main_list(event=-1):  # форма для регистрации
 @app.route('/change', methods=['GET', 'POST'])
 @auth.login_required
 def add():  # форма для добавления теста
+    print("name:", current_user.name)
     print("name:", auth.current_user().name)
     db_sess = db_session.create_session()
     form = SiteForm()
