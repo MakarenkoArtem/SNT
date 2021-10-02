@@ -9,6 +9,7 @@ from forms.site import SiteForm
 from data.users import User
 from data.site import Site
 from data import db_session
+from config import users
 from os import listdir, remove, rmdir, mkdir, environ
 from flask_login import LoginManager, current_user, login_user
 
@@ -18,10 +19,6 @@ app.config["PERMANENT_SESSION_LIFETIME"] = datetime.timedelta(days=1)
 app.config['SECRET_KEY'] = 'snt_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
-users = {
-    "snt_admin": "snt_password", "snt_main_user": "snt_pass"
-}
-
 
 @login_manager.user_loader
 def load_user(user_id):
