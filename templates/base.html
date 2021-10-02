@@ -111,14 +111,17 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             {% for image in images %}
+            {% if image != "" %}
             <button type="button" data-bs-target="#carouselExampleIndicators"
                     data-bs-slide-to="{{ loop.index0 }}"
                     {% if loop.first %} class="active" aria-current="true" {% endif %}
                     aria-label="Slide {{ loop.index }}"></button>
+            {% endif %}
             {% endfor %}
         </div>
         <div class="carousel-inner">
             {% for image in images %}
+            {% if image != "" %}
             <div class="carousel-item{% if loop.first %} active{% endif %}">
                 <a href="#img{{ image }}">
                     <img class="test" src="static/img/{{ image }}.png"></a>
@@ -126,6 +129,7 @@
             <a href="#report" class="lightbox" id="img{{ image }}">
                 <span style="background-image: url('/static/img/{{ image }}.png')"></span>
             </a>
+            {% endif %}
             {% endfor %}
         </div>
         <button class="carousel-control-prev" style="width:25%" type="button"
@@ -146,12 +150,14 @@
     </div>
     <br>
     {% for image in docs_image %}
+    {% if image != "" %}
     <a href="#img{{ image }}">
         <img class="doc-img" src="static/img/{{ image }}.png">
     </a>
     <a href="#docs" class="lightbox" id="img{{ image }}">
         <span style="background-image: url('/static/img/{{ image }}.png')"></span>
     </a>
+    {% endif %}
     {% endfor %}
     <br><br><br>
     <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1><br>

@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = 'snt_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 users = {
-    "admin": "password", "main_user": "pass"
+    "snt_admin": "snt_password", "snt_main_user": "snt_pass"
 }
 
 
@@ -35,7 +35,7 @@ def verify_password(username, password):
     user = db_sess.query(User).filter(
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
-        #user[0].date = datetime.datetime.now()
+        # user[0].date = datetime.datetime.now()
         print(current_user, user[0].name)
         if current_user is None:
             login_user(user[0], remember=True)
@@ -83,8 +83,10 @@ def main_list(event=-1):  # форма для регистрации
     site.text = ", ".join(s)
     db_sess.commit()
     print([i.images.split(", ") for i in text])
+    print(site.docs_image.split(','))
     return render_template('base.html', event_del=event, admin=admin,
-                           text=text, event_images=[i.images.split(", ")[:3] for i in text],  images=site.images.split(','),
+                           text=text, event_images=[i.images.split(", ")[:3] for i in text],
+                           images=site.images.split(','),
                            docs_image=site.docs_image.split(','), oplata_image=site.oplata_image,
                            oplata_text=site.oplata_text, dolgi_image=site.dolgi_image)
 
@@ -99,29 +101,24 @@ def add():  # форма для добавления теста
     db_sess = db_session.create_session()
     form = SiteForm()
     if form.validate_on_submit():
-        print(request.form)
         try:
-            print(1)
             site = db_sess.query(Site).filter(Site.id == 1).one()
-            print(1.1)
-        except sqlalchemy.exc.NoResultFound:
-            print(2)
-            site = Site(id=1)
-            db_sess.add(site)
-            site = db_sess.query(Site).filter(Site.id == 1).one()
-            print(2.1)
+            # except sqlalchemy.exc.NoResultFound:
+            # site = Site(id=1)
+            # db_sess.add(site)
+            # site = db_sess.query(Site).filter(Site.id == 1).one()
         except sqlalchemy.orm.exc.NoResultFound:
-            print(3)
-            site = Site(id=1)
+            site = Site(id=1, text="")
             db_sess.add(site)
             site = db_sess.query(Site).filter(Site.id == 1).one()
-            print(3.1)
         finally:
-            num_img = 1
             # site.text = form.text.data
             nums_img = []
-            if "checkbox1" in dict(request.form).keys():
-                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("im_")]
+            del_imgs = []
+            print(dict(request.form).keys())
+            if "checkbox1" in list(dict(request.form).keys()):
+                print("checkbox1")
+                num_img = 1
                 for i in form.images.data:
                     image = i.read()
                     if image == b'':
@@ -131,9 +128,13 @@ def add():  # форма для добавления теста
                         file.write(image)
                     num_img += 1
                 site.images = ','.join(nums_img)
+                nums_img = [f"{i}.png" for i in nums_img]
+                del_imgs += list(
+                    set([i for i in listdir("static/img") if i.startswith("im_")]) - set(nums_img))
             nums_img = []
-            if "checkbox2" in dict(request.form).keys():
-                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("docs_")]
+            if "checkbox2" in list(dict(request.form).keys()):
+                print("checkbox2")
+                num_img = 1
                 for i in form.docs_image.data:
                     image = i.read()
                     if image == b'':
@@ -143,32 +144,52 @@ def add():  # форма для добавления теста
                         file.write(image)
                     num_img += 1
                 site.docs_image = ','.join(nums_img)
-            if "checkbox3" in dict(request.form).keys():
-                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("oplata_")]
+                nums_img = [f"{i}.png" for i in nums_img]
+                del_imgs += list(
+                    set([i for i in listdir("static/img") if i.startswith("docs_")]) - set(nums_img))
+            nums_img = []
+            if "checkbox3" in list(dict(request.form).keys()):
+                print("checkbox3")
+                num_img = 1
                 try:
                     image = form.oplata_image.data.read()
                     if image != b'':
+                        nums_img.append(f"oplata_{num_img}")
                         site.oplata_image = f"oplata_{num_img}"
                         with open(f'static/img/oplata_{num_img}.png', 'wb') as file:
                             file.write(image)
                         num_img += 1
                 except AttributeError:
                     site.oplata_image = ""
-            if "checkbox4" in dict(request.form).keys():
+                nums_img = [f"{i}.png" for i in nums_img]
+                del_imgs += list(
+                    set([i for i in listdir("static/img") if i.startswith("oplata_")]) - set(
+                        nums_img))
+            if "checkbox4" in list(dict(request.form).keys()):
+                print("checkbox4")
                 site.oplata_text = form.oplata_text.data
-            if "checkbox5" in dict(request.form).keys():
-                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("dolgi_")]
+            nums_img = []
+            if "checkbox5" in list(dict(request.form).keys()):
+                print("checkbox5")
+                num_img = 1
                 try:
                     image = form.dolgi_image.data.read()
                     if image != b'':
+                        nums_img.append(f"dolgi_{num_img}")
                         site.dolgi_image = f"dolgi_{num_img}"
                         with open(f'static/img/dolgi_{num_img}.png', 'wb') as file:
                             file.write(image)
                         num_img += 1
                 except AttributeError:
                     site.dolgi_image = ""
+                nums_img = [f"{i}.png" for i in nums_img]
+                del_imgs += list(
+                    set([i for i in listdir("static/img") if i.startswith("dolgi_")]) - set(
+                        nums_img))
             db_sess.add(site)
             db_sess.commit()
+            print(del_imgs)
+            [remove(f"static/img/{i}") for i in del_imgs]
         return redirect('/')
     return render_template('change.html', form=form)
 
@@ -192,8 +213,8 @@ def event():  # форма для добавления теста
             site = Site(id=1)
             db_sess.add(site)
         finally:
-            print([int(i[6:].split(".")[0]) for i in listdir("static/img") if i.startswith("event_")])
-            num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if i.startswith("event_")] + [1])
+            num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if
+                           i.startswith("event_")] + [1])
             nums_img = []
             for i in form.images.data:
                 image = i.read()
@@ -238,7 +259,7 @@ def main():
         app.run(host='0.0.0.0', port=port)
     else:
         app.run(port=8080, host='127.0.0.1', debug=False)
-        #app.run(port=5000, host='89.223.100.101', debug=False)
+        # app.run(port=5000, host='89.223.100.101', debug=False)
 
 
 if __name__ == "__main__":
