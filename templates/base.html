@@ -77,12 +77,14 @@
                     {% endif %}
                     {{ ph.text }}
                     {% for image in event_images[loop.index0] %}
+                    {% if image != "" %}
                     <a href="#event{{ image }}">
                         <img style="float: right; position: relative;" class="imag" src="static/img/event_{{ image }}.png">
                     </a>
                     <a href="#news" class="lightbox" id="event{{ image }}">
                         <span style="background-image: url('/static/img/event_{{ image }}.png')"></span>
                     </a>
+                    {% endif %}
                     {% endfor %}
                     {% if admin %}
                     {% if event_del == ph.id %}

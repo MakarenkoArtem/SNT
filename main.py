@@ -23,6 +23,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
+    #print("id:", user_id)
     return db_sess.query(User).get(user_id)
 
 
@@ -33,11 +34,10 @@ def verify_password(username, password):
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
         # user[0].date = datetime.datetime.now()
-        print("!", vars(current_user), user[0].name)
-        if current_user is None:
+        #print("!", vars(current_user), user[0].name)
+        if current_user is None or True:
             login_user(user[0], remember=True)
         db_sess.commit()
-        print(username)
         return username
     '''
     if username in users and \
@@ -59,9 +59,7 @@ def del_event(event=-1):  # форма для регистрации
 def main_list(event=-1):  # форма для регистрации
     print(listdir("static/img"))
     try:
-        print("name:", auth.current_user())
-        if auth.current_user() is None:
-            raise AttributeError
+        print("name:", current_user.name)
         admin = True
     except AttributeError:
         admin = False
@@ -82,8 +80,6 @@ def main_list(event=-1):  # форма для регистрации
             pass
     site.text = ", ".join(s)
     db_sess.commit()
-    print([i.images.split(", ") for i in text])
-    print("1"+site.dolgi_image+"2")
     return render_template('base.html', event_del=event, admin=admin,
                            text=text, event_images=[i.images.split(", ")[:3] for i in text],
                            images=site.images.split(','),
@@ -118,9 +114,7 @@ def add():  # форма для добавления теста
             # site.text = form.text.data
             nums_img = []
             del_imgs = []
-            print(dict(request.form).keys())
             if "checkbox1" in list(dict(request.form).keys()):
-                print("checkbox1")
                 num_img = 1
                 for i in form.images.data:
                     image = i.read()
@@ -136,7 +130,6 @@ def add():  # форма для добавления теста
                     set([i for i in listdir("static/img") if i.startswith("im_")]) - set(nums_img))
             nums_img = []
             if "checkbox2" in list(dict(request.form).keys()):
-                print("checkbox2")
                 num_img = 1
                 for i in form.docs_image.data:
                     image = i.read()
@@ -152,7 +145,6 @@ def add():  # форма для добавления теста
                     set([i for i in listdir("static/img") if i.startswith("docs_")]) - set(nums_img))
             nums_img = []
             if "checkbox3" in list(dict(request.form).keys()):
-                print("checkbox3")
                 num_img = 1
                 try:
                     image = form.oplata_image.data.read()
@@ -169,11 +161,9 @@ def add():  # форма для добавления теста
                     set([i for i in listdir("static/img") if i.startswith("oplata_")]) - set(
                         nums_img))
             if "checkbox4" in list(dict(request.form).keys()):
-                print("checkbox4")
                 site.oplata_text = form.oplata_text.data
             nums_img = []
             if "checkbox5" in list(dict(request.form).keys()):
-                print("checkbox5")
                 num_img = 1
                 try:
                     image = form.dolgi_image.data.read()
@@ -191,7 +181,6 @@ def add():  # форма для добавления теста
                         nums_img))
             db_sess.add(site)
             db_sess.commit()
-            print(del_imgs)
             [remove(f"static/img/{i}") for i in del_imgs]
         return redirect('/')
     return render_template('change.html', form=form)
@@ -212,12 +201,13 @@ def event():  # форма для добавления теста
     if form.validate_on_submit():
         try:
             site = db_sess.query(Site).filter(Site.id == 1).one()
-        except sqlalchemy.exc.NoResultFound:
-            site = Site(id=1)
-            db_sess.add(site)
+            #except sqlalchemy.exc.NoResultFound:
+            #site = Site(id=1)
+            #db_sess.add(site)
         except sqlalchemy.orm.exc.NoResultFound:
-            site = Site(id=1)
+            site = Site(id=1, text="")
             db_sess.add(site)
+            site = db_sess.query(Site).filter(Site.id == 1).one()
         finally:
             num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if
                            i.startswith("event_")] + [1])
