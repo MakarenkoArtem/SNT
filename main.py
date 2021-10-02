@@ -33,11 +33,12 @@ def verify_password(username, password):
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
         # user[0].date = datetime.datetime.now()
-        print(current_user, user[0].name)
+        print("!", vars(current_user), user[0].name)
         if current_user is None:
             login_user(user[0], remember=True)
         db_sess.commit()
-        return user[0]
+        print(username)
+        return username
     '''
     if username in users and \
             check_password_hash(users.get(username), password):
@@ -58,7 +59,9 @@ def del_event(event=-1):  # форма для регистрации
 def main_list(event=-1):  # форма для регистрации
     print(listdir("static/img"))
     try:
-        print("name:", current_user.name)
+        print("name:", auth.current_user())
+        if auth.current_user() is None:
+            raise AttributeError
         admin = True
     except AttributeError:
         admin = False
@@ -92,9 +95,12 @@ def main_list(event=-1):  # форма для регистрации
 @auth.login_required
 def add():  # форма для добавления теста
     try:
-        print("name:", current_user.name)
+        print("name:", auth.current_user())
+        if auth.current_user() is None:
+            raise AttributeError
+        admin = True
     except AttributeError:
-        print(vars(current_user))
+        admin = False
     db_sess = db_session.create_session()
     form = SiteForm()
     if form.validate_on_submit():
@@ -195,9 +201,12 @@ def add():  # форма для добавления теста
 @auth.login_required
 def event():  # форма для добавления теста
     try:
-        print("name:", current_user.name)
+        print("name:", auth.current_user())
+        if auth.current_user() is None:
+            raise AttributeError
+        admin = True
     except AttributeError:
-        pass
+        admin = False
     db_sess = db_session.create_session()
     form = EventForm()
     if form.validate_on_submit():
