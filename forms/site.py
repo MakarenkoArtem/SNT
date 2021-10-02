@@ -12,7 +12,7 @@ class SiteForm(FlaskForm):
                                    validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
     oplata_image = FileField('Оплата членских взносов:',
                              validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
-    oplata_text = TextAreaField("Оплата членских взносов:", validators=[DataRequired()])
+    oplata_text = TextAreaField("Оплата членских взносов:", validators=[DataRequired()], default="...")
     dolgi_image = FileField('Долги по оплате членских взносов:',
                             validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
     submit = SubmitField('Сохранить')

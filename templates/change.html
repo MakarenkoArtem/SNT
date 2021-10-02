@@ -31,53 +31,58 @@
 
 </head>
 <body>
-<div class="container">
+<br><br>
+<div class="container" style="width: 85%">
     <form action="" method="post" style="colot: #0044ff" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         {% if err %}
         <div class="alert alert-danger" role="alert"><h2 align="right"><font color="red">{{ err
             }}</font></h2></div>
-        {% endif %}
-        <p>
+        {% endif %}<p>
+        <input class="form" id="checkbox1" name="checkbox1" type="checkbox"> Изменить:
             {{ form.images.label }}<br>
             {{ form.images(class="form-control-file") }}<br>
             {% for error in form.images.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}
-        </p>
+        </p></p>
         <p>
+        <input class="form" id="checkbox2" name="checkbox2" type="checkbox"> Изменить:
             {{ form.docs_image.label }}<br>
             {{ form.docs_image(class="form-control-file") }}<br>
             {% for error in form.docs_image.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}
-        </p>
+        </p></p>
         <p>
+        <input class="form" id="checkbox3" name="checkbox3" type="checkbox"> Изменить:
             {{ form.oplata_image.label }}<br>
             {{ form.oplata_image(class="form-control-file") }}<br>
             {% for error in form.oplata_image.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}
-        </p>
+        </p></p>
         <p>
+        <input class="form" id="checkbox4" name="checkbox4" type="checkbox"> Изменить:
             {{ form.oplata_text.label }}<br>
-            {{ form.oplata_text(class="form-control") }}<br>
+            {{ form.oplata_text(class="form-control", text="a") }}<br>
             {% for error in form.oplata_text.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}
-        </p>
+        </p></p>
         <p>
+        <input class="form" id="checkbox5" name="checkbox5" type="checkbox"> Изменить:
             {{ form.dolgi_image.label }}<br>
             {{ form.dolgi_image(class="form-control-file") }}<br>
             {% for error in form.dolgi_image.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}
-        </p>
+        </p></p>
         <a href="/" style="float: left;" class="btn btn-danger">Назад
         </a>
         <p align="right">{{ form.submit(type="submit", class="btn btn-primary") }}</p>

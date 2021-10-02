@@ -36,7 +36,7 @@ def verify_password(username, password):
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
         #user[0].date = datetime.datetime.now()
-        print(current_user)
+        print(current_user, user[0].name)
         if current_user is None:
             login_user(user[0], remember=True)
         db_sess.commit()
@@ -68,9 +68,9 @@ def main_list(event=-1):  # форма для регистрации
     db_sess = db_session.create_session()
     try:
         site = db_sess.query(Site).filter(Site.id == 1).one()
-    except sqlalchemy.exc.NoResultFound:
-        return redirect('/change')
     except sqlalchemy.orm.exc.NoResultFound:
+        return redirect('/change')
+    except sqlalchemy.exc.NoResultFound:
         return redirect('/change')
     s, text = [], []
     for i in site.text.split(", "):
@@ -95,62 +95,79 @@ def add():  # форма для добавления теста
     try:
         print("name:", current_user.name)
     except AttributeError:
-        pass
+        print(vars(current_user))
     db_sess = db_session.create_session()
     form = SiteForm()
     if form.validate_on_submit():
+        print(request.form)
         try:
+            print(1)
             site = db_sess.query(Site).filter(Site.id == 1).one()
+            print(1.1)
         except sqlalchemy.exc.NoResultFound:
+            print(2)
             site = Site(id=1)
             db_sess.add(site)
+            site = db_sess.query(Site).filter(Site.id == 1).one()
+            print(2.1)
         except sqlalchemy.orm.exc.NoResultFound:
+            print(3)
             site = Site(id=1)
             db_sess.add(site)
+            site = db_sess.query(Site).filter(Site.id == 1).one()
+            print(3.1)
         finally:
-            [remove("static/img/" + i) for i in listdir("static/img") if
-             i not in ['forest.jpg', "hello.gif", "nature.gif", "text.jpg"] and not i.startswith("event_")]
             num_img = 1
             # site.text = form.text.data
             nums_img = []
-            for i in form.images.data:
-                image = i.read()
-                if image == b'':
-                    continue
-                nums_img.append(str(num_img))
-                with open(f'static/img/{num_img}.png', 'wb') as file:
-                    file.write(image)
-                num_img += 1
-            site.images = ','.join(nums_img)
+            if "checkbox1" in dict(request.form).keys():
+                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("im_")]
+                for i in form.images.data:
+                    image = i.read()
+                    if image == b'':
+                        continue
+                    nums_img.append(f"im_{num_img}")
+                    with open(f'static/img/im_{num_img}.png', 'wb') as file:
+                        file.write(image)
+                    num_img += 1
+                site.images = ','.join(nums_img)
             nums_img = []
-            for i in form.docs_image.data:
-                image = i.read()
-                if image == b'':
-                    continue
-                nums_img.append(str(num_img))
-                with open(f'static/img/{num_img}.png', 'wb') as file:
-                    file.write(image)
-                num_img += 1
-            site.docs_image = ','.join(nums_img)
-            try:
-                image = form.oplata_image.data.read()
-                if image != b'':
-                    site.oplata_image = str(num_img)
-                    with open(f'static/img/{num_img}.png', 'wb') as file:
+            if "checkbox2" in dict(request.form).keys():
+                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("docs_")]
+                for i in form.docs_image.data:
+                    image = i.read()
+                    if image == b'':
+                        continue
+                    nums_img.append(f"docs_{num_img}")
+                    with open(f'static/img/docs_{num_img}.png', 'wb') as file:
                         file.write(image)
                     num_img += 1
-            except AttributeError:
-                site.oplata_image = ""
-            site.oplata_text = form.oplata_text.data
-            try:
-                image = form.dolgi_image.data.read()
-                if image != b'':
-                    site.dolgi_image = str(num_img)
-                    with open(f'static/img/{num_img}.png', 'wb') as file:
-                        file.write(image)
-                    num_img += 1
-            except AttributeError:
-                site.dolgi_image = ""
+                site.docs_image = ','.join(nums_img)
+            if "checkbox3" in dict(request.form).keys():
+                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("oplata_")]
+                try:
+                    image = form.oplata_image.data.read()
+                    if image != b'':
+                        site.oplata_image = f"oplata_{num_img}"
+                        with open(f'static/img/oplata_{num_img}.png', 'wb') as file:
+                            file.write(image)
+                        num_img += 1
+                except AttributeError:
+                    site.oplata_image = ""
+            if "checkbox4" in dict(request.form).keys():
+                site.oplata_text = form.oplata_text.data
+            if "checkbox5" in dict(request.form).keys():
+                [remove("static/img/" + i) for i in listdir("static/img") if i.startswith("dolgi_")]
+                try:
+                    image = form.dolgi_image.data.read()
+                    if image != b'':
+                        site.dolgi_image = f"dolgi_{num_img}"
+                        with open(f'static/img/dolgi_{num_img}.png', 'wb') as file:
+                            file.write(image)
+                        num_img += 1
+                except AttributeError:
+                    site.dolgi_image = ""
+            db_sess.add(site)
             db_sess.commit()
         return redirect('/')
     return render_template('change.html', form=form)
@@ -220,8 +237,8 @@ def main():
         port = int(environ.get("PORT", 5000))
         app.run(host='0.0.0.0', port=port)
     else:
-        #app.run(port=8080, host='127.0.0.1', debug=False)
-        app.run(port=5000, host='89.223.100.101', debug=False)
+        app.run(port=8080, host='127.0.0.1', debug=False)
+        #app.run(port=5000, host='89.223.100.101', debug=False)
 
 
 if __name__ == "__main__":

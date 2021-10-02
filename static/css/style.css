@@ -301,3 +301,10 @@ body { font-family: sans-serif; }
 .button-group {
   margin-bottom: 20px;
 }*/
+
+.input {
+  disabled: true;
+}
+#checkbox1:checked ~ .form-control-file {
+  disabled: true;
+}
