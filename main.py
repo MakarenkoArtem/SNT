@@ -210,7 +210,7 @@ def event():  # форма для добавления теста
             site = db_sess.query(Site).filter(Site.id == 1).one()
         finally:
             num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if
-                           i.startswith("event_")] + [1])
+                           i.startswith("event_")] + [1]) + 1
             nums_img = []
             for i in form.images.data:
                 image = i.read()
@@ -254,8 +254,8 @@ def main():
         port = int(environ.get("PORT", 5000))
         app.run(host='0.0.0.0', port=port)
     else:
-        app.run(port=8080, host='127.0.0.1', debug=False)
-        # app.run(port=5000, host='89.223.100.101', debug=False)
+        # app.run(port=8080, host='127.0.0.1', debug=False)
+        app.run(port=5000, host='89.223.100.101', debug=False)
 
 
 if __name__ == "__main__":
