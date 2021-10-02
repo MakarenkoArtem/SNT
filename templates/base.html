@@ -163,9 +163,11 @@
     <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1><br>
         <table width="100%">
             <td width="50%">
+                {% if oplata_image != "" %}
                 <a href="#img{{ oplata_image }}">
                     <img class="img" src="static/img/{{ oplata_image }}.png" width="100%">
                 </a>
+                {% endif %}
             </td>
             <a href="#pays" class="lightbox" id="img{{ oplata_image }}">
                 <span style="background-image: url('/static/img/{{ oplata_image }}.png')"></span>
@@ -175,10 +177,11 @@
     </div>
     <br><br><br>
     <div class="text" align="center" id="dolgi"><h1 align="center">Долги по оплате членских
-        взносов</h1><br>
+        взносов</h1>{% if dolgi_image != "" %}<br>
         <a href="#img{{ dolgi_image }}">
             <img class="img" src="static/img/{{ dolgi_image }}.png" width="100%"></td>
         </a>
+        {% endif %}
     </div>
     <a href="#dolgi" class="lightbox" id="img{{ dolgi_image }}">
         <span style="background-image: url('/static/img/{{ dolgi_image }}.png')"></span>

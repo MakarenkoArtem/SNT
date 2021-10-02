@@ -80,7 +80,7 @@ def main_list(event=-1):  # форма для регистрации
     site.text = ", ".join(s)
     db_sess.commit()
     print([i.images.split(", ") for i in text])
-    print(site.docs_image.split(','))
+    print("1"+site.dolgi_image+"2")
     return render_template('base.html', event_del=event, admin=admin,
                            text=text, event_images=[i.images.split(", ")[:3] for i in text],
                            images=site.images.split(','),
