@@ -51,7 +51,7 @@ def del_event(event=-1):  # форма для регистрации
     site = db_sess.query(Site).filter(User.id == 1).one()
     site.text = ", ".join([i for i in site.text.split(", ") if i != str(event)])
     db_sess.commit()
-    return redirect('/')
+    return redirect('/#news')
 
 
 @app.route('/<int:event>')
