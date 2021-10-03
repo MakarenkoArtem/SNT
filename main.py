@@ -71,7 +71,9 @@ def main_list(event=-1):  # форма для регистрации
     except sqlalchemy.exc.NoResultFound:
         return redirect('/change')
     s, text = [], []
-    for i in site.text.split(", "):
+    events = site.text.split(", ")
+    events.reverse()
+    for i in events:
         try:
             e = db_sess.query(Event).filter(Event.id == int(i)).one()
             s.append(i)
