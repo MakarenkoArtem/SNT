@@ -238,8 +238,8 @@ def main():
         port = int(environ.get("PORT", 5000))
         app.run(host='0.0.0.0', port=port)
     else:
-        # app.run(port=8080, host='127.0.0.1', debug=False)
-        app.run(port=5000, host='89.223.100.101', debug=False)
+        app.run(port=8080, host='127.0.0.1', debug=False)
+        # app.run(port=5000, host='89.223.100.101', debug=False)
 
 
 if __name__ == "__main__":
