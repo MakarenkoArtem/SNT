@@ -12,6 +12,8 @@ from data import db_session
 from config import users
 from os import listdir, remove, rmdir, mkdir, environ
 from flask_login import LoginManager, current_user, login_user
+import fitz
+from time import sleep
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -20,10 +22,47 @@ app.config['SECRET_KEY'] = 'snt_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
+def load_images(form, end_str, site, del_imgs):
+    num_img, nums_img = 1, []
+    for i in form:
+        if vars(i)["filename"].endswith(".pdf"):
+            with open(f'static/{vars(i)["filename"]}', 'wb') as file:
+                file.write(i.read())
+            doc = fitz.open(f'static/{vars(i)["filename"]}')
+            for y in range(len(doc)):
+                for img in doc.getPageImageList(y):
+                    xref = img[0]
+                    pix = fitz.Pixmap(doc, xref)
+                    if pix.n < 5:  # this is GRAY or RGB
+                        pix.writePNG(f"static/img/{end_str}{num_img}.png")
+                    else:  # CMYK: convert to RGB first
+                        pix1 = fitz.Pixmap(fitz.csRGB, pix)
+                        pix1.writePNG(f"static/img/{end_str}{num_img}.png")
+                        pix1 = None
+                    pix = None
+                    nums_img.append(f"{end_str}{num_img}")
+                    num_img += 1
+            doc.close()
+            remove(f'static/{vars(i)["filename"]}')
+            continue
+        image = i.read()
+        if image == b'':
+            continue
+        nums_img.append(f"{end_str}{num_img}")
+        with open(f'static/img/{end_str}{num_img}.png', 'wb') as file:
+            file.write(image)
+        num_img += 1
+    site = ','.join(nums_img)
+    nums_img = [f"{i}.png" for i in nums_img]
+    del_imgs += list(set([i for i in listdir("static/img") if i.startswith(end_str)]) - set(nums_img))
+    return site, del_imgs
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    #print("id:", user_id)
+    # print("id:", user_id)
     return db_sess.query(User).get(user_id)
 
 
@@ -34,7 +73,7 @@ def verify_password(username, password):
         User.name == username and check_password_hash(User.hashed_password, password)).all()
     if len(user):
         # user[0].date = datetime.datetime.now()
-        #print("!", vars(current_user), user[0].name)
+        # print("!", vars(current_user), user[0].name)
         if current_user is None or True:
             login_user(user[0], remember=True)
         db_sess.commit()
@@ -113,74 +152,17 @@ def add():  # форма для добавления теста
             db_sess.add(site)
             site = db_sess.query(Site).filter(Site.id == 1).one()
         finally:
-            # site.text = form.text.data
-            nums_img = []
             del_imgs = []
             if "checkbox1" in list(dict(request.form).keys()):
-                num_img = 1
-                for i in form.images.data:
-                    image = i.read()
-                    if image == b'':
-                        continue
-                    nums_img.append(f"im_{num_img}")
-                    with open(f'static/img/im_{num_img}.png', 'wb') as file:
-                        file.write(image)
-                    num_img += 1
-                site.images = ','.join(nums_img)
-                nums_img = [f"{i}.png" for i in nums_img]
-                del_imgs += list(
-                    set([i for i in listdir("static/img") if i.startswith("im_")]) - set(nums_img))
-            nums_img = []
+                site.images, del_imgs = load_images(form.images.data, "im_", site.images, del_imgs)
             if "checkbox2" in list(dict(request.form).keys()):
-                num_img = 1
-                for i in form.docs_image.data:
-                    image = i.read()
-                    if image == b'':
-                        continue
-                    nums_img.append(f"docs_{num_img}")
-                    with open(f'static/img/docs_{num_img}.png', 'wb') as file:
-                        file.write(image)
-                    num_img += 1
-                site.docs_image = ','.join(nums_img)
-                nums_img = [f"{i}.png" for i in nums_img]
-                del_imgs += list(
-                    set([i for i in listdir("static/img") if i.startswith("docs_")]) - set(nums_img))
-            nums_img = []
+                site.docs_image, del_imgs = load_images(form.docs_image.data, "docs_", site.docs_image, del_imgs)
             if "checkbox3" in list(dict(request.form).keys()):
-                num_img = 1
-                try:
-                    image = form.oplata_image.data.read()
-                    if image != b'':
-                        nums_img.append(f"oplata_{num_img}")
-                        site.oplata_image = f"oplata_{num_img}"
-                        with open(f'static/img/oplata_{num_img}.png', 'wb') as file:
-                            file.write(image)
-                        num_img += 1
-                except AttributeError:
-                    site.oplata_image = ""
-                nums_img = [f"{i}.png" for i in nums_img]
-                del_imgs += list(
-                    set([i for i in listdir("static/img") if i.startswith("oplata_")]) - set(
-                        nums_img))
+                site.oplata_image, del_imgs = load_images(form.oplata_image.data, "oplata_", site.oplata_image, del_imgs)
             if "checkbox4" in list(dict(request.form).keys()):
                 site.oplata_text = form.oplata_text.data
-            nums_img = []
             if "checkbox5" in list(dict(request.form).keys()):
-                num_img = 1
-                try:
-                    image = form.dolgi_image.data.read()
-                    if image != b'':
-                        nums_img.append(f"dolgi_{num_img}")
-                        site.dolgi_image = f"dolgi_{num_img}"
-                        with open(f'static/img/dolgi_{num_img}.png', 'wb') as file:
-                            file.write(image)
-                        num_img += 1
-                except AttributeError:
-                    site.dolgi_image = ""
-                nums_img = [f"{i}.png" for i in nums_img]
-                del_imgs += list(
-                    set([i for i in listdir("static/img") if i.startswith("dolgi_")]) - set(
-                        nums_img))
+                site.dolgi_image, del_imgs = load_images(form.dolgi_image.data, "dolgi_", site.dolgi_image, del_imgs)
             db_sess.add(site)
             db_sess.commit()
             [remove(f"static/img/{i}") for i in del_imgs]
@@ -203,9 +185,9 @@ def event():  # форма для добавления теста
     if form.validate_on_submit():
         try:
             site = db_sess.query(Site).filter(Site.id == 1).one()
-            #except sqlalchemy.exc.NoResultFound:
-            #site = Site(id=1)
-            #db_sess.add(site)
+            # except sqlalchemy.exc.NoResultFound:
+            # site = Site(id=1)
+            # db_sess.add(site)
         except sqlalchemy.orm.exc.NoResultFound:
             site = Site(id=1, text="")
             db_sess.add(site)
