@@ -30,8 +30,8 @@ def load_images(form, end_str, site, del_imgs):
             with open(f'static/{vars(i)["filename"]}', 'wb') as file:
                 file.write(i.read())
             doc = fitz.open(f'static/{vars(i)["filename"]}')
-            for i in range(len(doc)):
-                page = doc.loadPage(i)  # number of page
+            for n in range(len(doc)):
+                page = doc.loadPage(n)  # number of page
                 pix = page.getPixmap()
                 output = f"static/img/{end_str}{num_img}.png"
                 pix.writePNG(output)
