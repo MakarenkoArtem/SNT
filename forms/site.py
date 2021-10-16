@@ -11,9 +11,9 @@ class SiteForm(FlaskForm):
     docs_image = MultipleFileField('Документы СНТ:',
                                    validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
     oplata_image = FileField('Оплата членских взносов:',
-                             validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
+                             validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
     oplata_text = TextAreaField("Оплата членских взносов:", validators=[DataRequired()], default="...")
     dolgi_image = FileField('Долги по оплате членских взносов:',
-                            validators=[FileAllowed(['jpg', 'png', "bmp"], 'Images only!')])
+                            validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
     submit = SubmitField('Сохранить')
 # multiple
