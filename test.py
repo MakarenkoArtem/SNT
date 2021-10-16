@@ -42,14 +42,23 @@ from pdf2image import convert_from_path
 images = convert_from_path(open('a.pdf', 'rb').read())
 
 for page_no, image in enumerate(images):
-    image.save(f'page-{page_no}.jpeg')'''
+    image.save(f'page-{page_no}.jpeg')
 import pip
 
 pip.main(['install', 'pdf2image'])
 pip.main(['install', 'poppler-utils'])
 from pdf2image import convert_from_path
 
-images = convert_from_path('a.pdf')
+images = convert_from_path('a.pdf', 500)
 
 for page_no, image in enumerate(images):
-    image.save(f'img/page-{page_no}.jpeg')
+    image.save(f'static/img/page-{page_no}.jpeg')'''
+import fitz
+
+pdffile = "a.pdf"
+doc = fitz.open(pdffile)
+for i in range(len(doc)):
+    page = doc.loadPage(i)  # number of page
+    pix = page.getPixmap()
+    output = f"outfile{i}.png"
+    pix.writePNG(output)

@@ -30,19 +30,13 @@ def load_images(form, end_str, site, del_imgs):
             with open(f'static/{vars(i)["filename"]}', 'wb') as file:
                 file.write(i.read())
             doc = fitz.open(f'static/{vars(i)["filename"]}')
-            for y in range(len(doc)):
-                for img in doc.getPageImageList(y):
-                    xref = img[0]
-                    pix = fitz.Pixmap(doc, xref)
-                    if pix.n < 5:  # this is GRAY or RGB
-                        pix.writePNG(f"static/img/{end_str}{num_img}.png")
-                    else:  # CMYK: convert to RGB first
-                        pix1 = fitz.Pixmap(fitz.csRGB, pix)
-                        pix1.writePNG(f"static/img/{end_str}{num_img}.png")
-                        pix1 = None
-                    pix = None
-                    nums_img.append(f"{end_str}{num_img}")
-                    num_img += 1
+            for i in range(len(doc)):
+                page = doc.loadPage(i)  # number of page
+                pix = page.getPixmap()
+                output = f"static/img/{end_str}{num_img}.png"
+                pix.writePNG(output)
+                nums_img.append(f"{end_str}{num_img}")
+                num_img += 1
             doc.close()
             remove(f'static/{vars(i)["filename"]}')
             continue
@@ -238,8 +232,8 @@ def main():
         port = int(environ.get("PORT", 5000))
         app.run(host='0.0.0.0', port=port)
     else:
-        app.run(port=8080, host='127.0.0.1', debug=False)
-        # app.run(port=5000, host='89.223.100.101', debug=False)
+        # app.run(port=8080, host='127.0.0.1', debug=False)
+        app.run(port=5000, host='89.223.100.101', debug=False)
 
 
 if __name__ == "__main__":
