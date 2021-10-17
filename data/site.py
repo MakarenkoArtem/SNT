@@ -17,4 +17,5 @@ class Site(SqlAlchemyBase, SerializerMixin):
     oplata_image = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
     oplata_text = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
     #dolgi_image = sqlalchemy.Column(sqlalchemy.LargeBinary, nullable=True)
-    dolgi_image = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
+    dolgi_text = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
+    #dolgi_image = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")

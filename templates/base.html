@@ -86,6 +86,7 @@
                     </a>
                     {% endif %}
                     {% endfor %}
+                    <br>
                     {% if admin %}
                     {% if event_del == ph.id %}
                     <div style="float: center; position: relative;"><a
@@ -149,21 +150,60 @@
     </div>
     <br><br>
     <div class="text" align="center" id="docs"><h1 align="center">Документы СНТ</h1>
-    </div>
     <br>
-    {% for image in docs_image %}
-    {% if image != "" %}
-    <a href="#img{{ image }}">
+    </div>
+    {% for images in docs_image %}
+    <div id="carouseldoc{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            {% for image in images %}
+            {% if image != "" %}
+            <button type="button" data-bs-target="#carouseldoc{{ loop.index }}"
+                    data-bs-slide-to="{{ loop.index0 }}"
+                    {% if loop.first %} class="active" aria-current="true" {% endif %}
+                    aria-label="Slide {{ loop.index }}"></button>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for image in images %}
+            {% if image != "" %}
+            <div class="carousel-item{% if loop.first %} active{% endif %}">
+                <a href="#doc{{ image }}">
+                    <img class="test" src="static/img/{{ image }}.png"></a>
+            </div>
+            <a href="#docs" class="lightbox" id="doc{{ image }}">
+                <span style="background-image: url('/static/img/{{ image }}.png')"></span>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" style="width:25%" type="button"
+                data-bs-target="#carouseldoc{{ loop.index }}"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" style="width:25%" type="button"
+                data-bs-target="#carouseldoc{{ loop.index }}"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!--{% if images != "" %}
+    a href="#img{{ image }}">
         <img class="doc-img" src="static/img/{{ image }}.png">
     </a>
-    <a href="#docs" class="lightbox" id="img{{ image }}">
+    <a-- href="#docs" class="lightbox" id="img{{ image }}">
         <span style="background-image: url('/static/img/{{ image }}.png')"></span>
-    </a>
-    {% endif %}
+    </a
+    {% endif %}-->
+    <h7><br></h7>
     {% endfor %}
     <br><br><br>
     <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1><br>
-        <table width="100%">
+    </div>
+        <!--<table width="100%">
             <td width="50%">
                 {% if oplata_image != "" %}
                 <a href="#img{{ oplata_image }}">
@@ -173,21 +213,63 @@
             </td>
             <a href="#pays" class="lightbox" id="img{{ oplata_image }}">
                 <span style="background-image: url('/static/img/{{ oplata_image }}.png')"></span>
-            </a>
-            <td><h2 style="margin-left: 25px;" align="top">{{ oplata_text }}</h2></td>
-        </table>
+            </a>-->
+            {% for images in oplata_image %}
+            <div id="carouseloplata{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for image in images %}
+                    {% if image != "" %}
+                    <button type="button" data-bs-target="#carouseloplata{{ loop.index }}"
+                            data-bs-slide-to="{{ loop.index0 }}"
+                            {% if loop.first %} class="active" aria-current="true" {% endif %}
+                            aria-label="Slide {{ loop.index }}"></button>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for image in images %}
+                    {% if image != "" %}
+                    <div class="carousel-item{% if loop.first %} active{% endif %}">
+                        <a href="#oplata{{ image }}">
+                            <img class="test" src="static/img/{{ image }}.png"></a>
+                    </div>
+                    <a href="#docs" class="lightbox" id="oplata{{ image }}">
+                        <span style="background-image: url('/static/img/{{ image }}.png')"></span>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" style="width:25%" type="button"
+                        data-bs-target="#carouseloplata{{ loop.index }}"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" style="width:25%" type="button"
+                        data-bs-target="#carouseloplata{{ loop.index }}"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        <h7><br></h7>
+        {% endfor %}
+    <div class="text" align="center">
+        <h2 style="margin-left: 25px;" align="top">{{ oplata_text }}</h2>
     </div>
     <br><br><br>
     <div class="text" align="center" id="dolgi"><h1 align="center">Долги по оплате членских
-        взносов</h1>{% if dolgi_image != "" %}<br>
+        взносов</h1><!--{% if dolgi_image != "" %}<br>
         <a href="#img{{ dolgi_image }}">
             <img class="img" src="static/img/{{ dolgi_image }}.png" width="100%"></td>
-        </a>
-        {% endif %}
+        </a>-->
+        <br>
+        <h2 style="widtht: 75%;">{{ dolgi_text }}</h2>
+        <!--{% endif %}-->
     </div>
-    <a href="#dolgi" class="lightbox" id="img{{ dolgi_image }}">
+    <!--<a href="#dolgi" class="lightbox" id="img{{ dolgi_image }}">
         <span style="background-image: url('/static/img/{{ dolgi_image }}.png')"></span>
-    </a>
+    </a>-->
     <br><br><br>
     <div class="text" align="center" id="cont"><h1 align="center">Контакты</h1><br>
         <!--table style="width:100%">

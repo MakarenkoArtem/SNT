@@ -66,7 +66,6 @@
             {% endfor %}
         </p></p>
         <p>
-        <input class="form" id="checkbox4" name="checkbox4" type="checkbox"> Изменить:
             {{ form.oplata_text.label }}<br>
             {{ form.oplata_text(class="form-control", text="a") }}<br>
             {% for error in form.oplata_text.errors %}
@@ -75,10 +74,9 @@
             {% endfor %}
         </p></p>
         <p>
-        <input class="form" id="checkbox5" name="checkbox5" type="checkbox"> Изменить:
-            {{ form.dolgi_image.label }}<br>
-            {{ form.dolgi_image(class="form-control-file") }}<br>
-            {% for error in form.dolgi_image.errors %}
+            {{ form.dolgi_text.label }}<br>
+            {{ form.dolgi_text(class="form-control", text="a") }}<br>
+            {% for error in form.dolgi_text.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
             {% endfor %}

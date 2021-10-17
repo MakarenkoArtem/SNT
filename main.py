@@ -24,32 +24,35 @@ login_manager.init_app(app)
 
 
 def load_images(form, end_str, site, del_imgs):
-    num_img, nums_img = 1, []
+    num_img, nums_img, other_imgs = 1, [], []
     for i in form:
-        if vars(i)["filename"].endswith(".pdf"):
-            with open(f'static/{vars(i)["filename"]}', 'wb') as file:
+        if i.filename.endswith(".pdf"):
+            img_pdf = []
+            with open(f'static/{i.filename}', 'wb') as file:
                 file.write(i.read())
-            doc = fitz.open(f'static/{vars(i)["filename"]}')
+            doc = fitz.open(f'static/{i.filename}')
             for n in range(len(doc)):
                 page = doc.loadPage(n)  # number of page
                 pix = page.getPixmap()
                 output = f"static/img/{end_str}{num_img}.png"
                 pix.writePNG(output)
-                nums_img.append(f"{end_str}{num_img}")
+                print(output)
+                img_pdf.append(f"{end_str}{num_img}")
                 num_img += 1
             doc.close()
-            remove(f'static/{vars(i)["filename"]}')
+            remove(f'static/{i.filename}')
+            nums_img.append(";".join(img_pdf))
             continue
         image = i.read()
         if image == b'':
             continue
-        nums_img.append(f"{end_str}{num_img}")
+        other_imgs.append(f"{end_str}{num_img}")
         with open(f'static/img/{end_str}{num_img}.png', 'wb') as file:
             file.write(image)
         num_img += 1
-    site = ','.join(nums_img)
-    nums_img = [f"{i}.png" for i in nums_img]
-    del_imgs += list(set([i for i in listdir("static/img") if i.startswith(end_str)]) - set(nums_img))
+    site = ','.join(nums_img + [";".join(other_imgs)])
+    #nums_img = [f"{i}.png" for i in nums_img]
+    del_imgs += list(set([i.rstrip(".png") for i in listdir("static/img") if i.startswith(end_str)]) - set(site.replace(";", ",").split(",")))
     return site, del_imgs
 
 
@@ -115,11 +118,12 @@ def main_list(event=-1):  # форма для регистрации
             pass
     site.text = ", ".join(s)
     db_sess.commit()
+    print([i.split(";") for i in site.images.split(',')])
     return render_template('base.html', event_del=event, admin=admin,
                            text=text, event_images=[i.images.split(", ")[:3] for i in text],
-                           images=site.images.split(','),
-                           docs_image=site.docs_image.split(','), oplata_image=site.oplata_image,
-                           oplata_text=site.oplata_text, dolgi_image=site.dolgi_image)
+                           images=[i.split(";") for i in site.images.split(',')][0],
+                           docs_image=[i.split(";") for i in site.docs_image.split(',')], oplata_image=[i.split(";") for i in site.oplata_image.split(',')],
+                           oplata_text=site.oplata_text, dolgi_text=site.dolgi_text)
 
 
 @app.route('/change', methods=['GET', 'POST'])
@@ -134,33 +138,35 @@ def add():  # форма для добавления теста
         admin = False
     db_sess = db_session.create_session()
     form = SiteForm()
+    try:
+        site = db_sess.query(Site).filter(Site.id == 1).one()
+        # except sqlalchemy.exc.NoResultFound:
+        # site = Site(id=1)
+        # db_sess.add(site)
+        # site = db_sess.query(Site).filter(Site.id == 1).one()
+    except sqlalchemy.orm.exc.NoResultFound:
+        site = Site(id=1, text="")
+        db_sess.add(site)
+        site = db_sess.query(Site).filter(Site.id == 1).one()
     if form.validate_on_submit():
-        try:
-            site = db_sess.query(Site).filter(Site.id == 1).one()
-            # except sqlalchemy.exc.NoResultFound:
-            # site = Site(id=1)
-            # db_sess.add(site)
-            # site = db_sess.query(Site).filter(Site.id == 1).one()
-        except sqlalchemy.orm.exc.NoResultFound:
-            site = Site(id=1, text="")
-            db_sess.add(site)
-            site = db_sess.query(Site).filter(Site.id == 1).one()
-        finally:
-            del_imgs = []
-            if "checkbox1" in list(dict(request.form).keys()):
-                site.images, del_imgs = load_images(form.images.data, "im_", site.images, del_imgs)
-            if "checkbox2" in list(dict(request.form).keys()):
-                site.docs_image, del_imgs = load_images(form.docs_image.data, "docs_", site.docs_image, del_imgs)
-            if "checkbox3" in list(dict(request.form).keys()):
-                site.oplata_image, del_imgs = load_images(form.oplata_image.data, "oplata_", site.oplata_image, del_imgs)
-            if "checkbox4" in list(dict(request.form).keys()):
-                site.oplata_text = form.oplata_text.data
-            if "checkbox5" in list(dict(request.form).keys()):
-                site.dolgi_image, del_imgs = load_images(form.dolgi_image.data, "dolgi_", site.dolgi_image, del_imgs)
-            db_sess.add(site)
-            db_sess.commit()
-            [remove(f"static/img/{i}") for i in del_imgs]
+        del_imgs = []
+        if "checkbox1" in list(dict(request.form).keys()):
+            site.images, del_imgs = load_images(form.images.data, "im_", site.images, del_imgs)
+        if "checkbox2" in list(dict(request.form).keys()):
+            site.docs_image, del_imgs = load_images(form.docs_image.data, "docs_", site.docs_image, del_imgs)
+        if "checkbox3" in list(dict(request.form).keys()):
+            site.oplata_image, del_imgs = load_images(form.oplata_image.data, "oplata_", site.oplata_image, del_imgs)
+        #if "checkbox4" in list(dict(request.form).keys()):
+        site.oplata_text = form.oplata_text.data
+        #if "checkbox5" in list(dict(request.form).keys()):
+        site.dolgi_text = form.dolgi_text.data
+        # site.dolgi_image, del_imgs = load_images(form.dolgi_image.data, "dolgi_", site.dolgi_image, del_imgs)
+        db_sess.add(site)
+        db_sess.commit()
+        [remove(f"static/img/{i}") for i in del_imgs]
         return redirect('/')
+    form.oplata_text.data = site.oplata_text
+    form.dolgi_text.data = site.dolgi_text
     return render_template('change.html', form=form)
 
 

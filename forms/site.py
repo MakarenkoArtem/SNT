@@ -6,14 +6,13 @@ from wtforms.validators import DataRequired
 
 class SiteForm(FlaskForm):
     #text = TextAreaField('Повестка дня собрания:', validators=[DataRequired()])
-    images = MultipleFileField('Отчет Правления:',
-                               validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
-    docs_image = MultipleFileField('Документы СНТ:',
-                                   validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
-    oplata_image = FileField('Оплата членских взносов:',
-                             validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
-    oplata_text = TextAreaField("Оплата членских взносов:", validators=[DataRequired()], default="...")
-    dolgi_image = FileField('Долги по оплате членских взносов:',
-                            validators=[FileAllowed(['jpg', 'png', "bmp", "pdf"], 'Images only!')])
+    images = MultipleFileField('Отчет Правления(jpg, jpeg, png, bmp, pdf):',
+                               validators=[FileAllowed(['jpg', 'jpeg', 'png', "bmp", "pdf"], 'Images only!')])
+    docs_image = MultipleFileField('Документы СНТ(jpg, jpeg, png, bmp, pdf):',
+                                   validators=[FileAllowed(['jpg', 'jpeg', 'png', "bmp", "pdf"], 'Images only!')])
+    oplata_image = MultipleFileField('Оплата членских взносов(jpg, jpeg, png, bmp, pdf):',
+                             validators=[FileAllowed(['jpg', 'jpeg', 'png', "bmp", "pdf"], 'Images only!')])
+    oplata_text = TextAreaField("Оплата членских взносов:", validators=[DataRequired()], default="...!")
+    dolgi_text = TextAreaField("Долги по оплате членских взносов:", validators=[DataRequired()], default="...")
     submit = SubmitField('Сохранить')
 # multiple
