@@ -10,5 +10,5 @@ class Event(SqlAlchemyBase, SerializerMixin):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     text = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    images = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    images = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
     znach = sqlalchemy.Column(sqlalchemy.BOOLEAN)

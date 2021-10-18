@@ -81,6 +81,51 @@ def verify_password(username, password):
         return username'''
 
 
+@app.route('/edit/<int:event>', methods=['GET', 'POST'])
+def edit_event(event):  # форма для регистрации
+    try:
+        print("name:", auth.current_user())
+        if auth.current_user() is None:
+            raise AttributeError
+        admin = True
+    except AttributeError:
+        admin = False
+    db_sess = db_session.create_session()
+    form = EventForm()
+    try:
+        event = db_sess.query(Event).filter(Event.id == event).one()
+        # except sqlalchemy.exc.NoResultFound:
+        # site = Site(id=1)
+        # db_sess.add(site)
+        # site = db_sess.query(Site).filter(Site.id == 1).one()
+    except sqlalchemy.orm.exc.NoResultFound:
+        return redirect('/')
+    print(1)
+    if form.validate_on_submit():
+        print(2)
+        if "checkbox1" in list(dict(request.form).keys()):
+            [remove(f"event_{i}.png") for i in event.images.split(", ")]
+            num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if
+                           i.startswith("event_")] + [1]) + 1
+            nums_img = []
+            for i in form.images.data:
+                image = i.read()
+                if image == b'':
+                    continue
+                nums_img.append(str(num_img))
+                with open(f'static/img/event_{num_img}.png', 'wb') as file:
+                    file.write(image)
+                num_img += 1
+            event.images = ", ".join(nums_img)
+        event.text = form.text.data
+        event.znach = form.znach.data
+        db_sess.commit()
+        return redirect('/')
+    form.text.data = event.text
+    form.znach.data = event.znach
+    return render_template('event.html', form=form, edit=True)
+
+
 @app.route('/del/<int:event>')
 def del_event(event=-1):  # форма для регистрации
     db_sess = db_session.create_session()
@@ -147,6 +192,7 @@ def add():  # форма для добавления теста
     except sqlalchemy.orm.exc.NoResultFound:
         site = Site(id=1, text="")
         db_sess.add(site)
+        db_sess.commit()
         site = db_sess.query(Site).filter(Site.id == 1).one()
     if form.validate_on_submit():
         del_imgs = []
@@ -191,6 +237,7 @@ def event():  # форма для добавления теста
         except sqlalchemy.orm.exc.NoResultFound:
             site = Site(id=1, text="")
             db_sess.add(site)
+            db_sess.commit()
             site = db_sess.query(Site).filter(Site.id == 1).one()
         finally:
             num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if
@@ -210,7 +257,7 @@ def event():  # форма для добавления теста
             site.text = ", ".join(site.text.split(", ") + [str(event.id)])
             db_sess.commit()
         return redirect('/')
-    return render_template('event.html', form=form)
+    return render_template('event.html', form=form, edit=False)
 
 
 def main():

@@ -48,6 +48,9 @@
             {% endfor %}
         </p>
         <p>
+        {% if edit %}
+        <input class="form" id="checkbox1" name="checkbox1" type="checkbox"> Изменить:
+        {% endif %}
             {{ form.images.label }}
             {{ form.images(class="form") }}
             {% for error in form.images.errors %}
