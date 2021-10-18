@@ -153,12 +153,18 @@ def main_list(event=-1):  # форма для регистрации
         return redirect('/change')
     s, text = [], []
     events = site.text.split(", ")
-    events.reverse()
+    events.sort()
+    num_znach = 0
     for i in events:
         try:
             e = db_sess.query(Event).filter(Event.id == int(i)).one()
-            s.append(i)
-            text.append(e)
+            if e.znach:
+                s.insert(0, i)
+                text.insert(0, e)
+                num_znach += 1
+            else:
+                s.insert(num_znach, i)
+                text.insert(num_znach, e)
         except BaseException:
             pass
     site.text = ", ".join(s)
