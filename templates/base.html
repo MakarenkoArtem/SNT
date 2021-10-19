@@ -62,13 +62,37 @@
 <div class="main" style="background-color: #ebf5f4" align="center">
     <br>
     <div class="news">
-    <div class="text" align="center" id="news"><h1 align="center" style="color: #363636"><b><big>Доска
-        объявлений</big></b></h1><br></div>
+        <div class="text" align="center" id="news"><h1 align="center" style="color: #363636"><b><big>Доска
+            объявлений</big></b></h1><br></div>
         <!--h2 align="center">Уважаемые садоводы!</h2-->
-        {% for ph in text %}
         <h3 align="left">
+        {% if main_event != "" %}
+            <div class="alert alert-danger" id="content" role="alert"><span style="color:#FF0000">!!! </span>
+            {{ main_event }}
+            <br>
+            {% if admin %}
+            <div style="float: center; position: relative;"><a
+                    href="/change"
+                    class="btn btn-warning">Редактировать
+            </a>
+                {% if event_del == 0 %}<a
+                        href="/del/0"
+                        class="btn btn-danger">Точно удалить</a>
+                <!--div style="float: center; position: relative; margin-right: 5px"--><a
+                        href="/#news"
+                        class="btn btn-primary">Отмена</a>
+                {% else %}
+                <a
+                        href="/0#news"
+                        class="btn btn-danger">Удалить</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% for ph in text %}
             {% if ph.znach %}
-            <div class="alert alert-danger" id="content" role="alert"><span style="color:#FF0000">! </span>
+            <div class="alert alert-warning" id="content" role="alert"><span style="color:#FF0000">! </span>
                 {% else %}
                 <div class="alert alert-primary" role="alert">
                     {% endif %}
@@ -90,21 +114,22 @@
                             href="/edit/{{ ph.id }}"
                             class="btn btn-warning">Редактировать
                     </a>
-                    {% if event_del == ph.id %}<a
-                            href="/del/{{ ph.id }}"
-                            class="btn btn-danger">Точно удалить</a>
-                    <!--div style="float: center; position: relative; margin-right: 5px"--><a
-                            href="/#news"
-                            class="btn btn-primary">Отмена</a>
-                    {% else %}
+                        {% if event_del == ph.id %}<a
+                                href="/del/{{ ph.id }}"
+                                class="btn btn-danger">Точно удалить</a>
+                        <!--div style="float: center; position: relative; margin-right: 5px"--><a
+                                href="/#news"
+                                class="btn btn-primary">Отмена</a>
+                        {% else %}
                         <a
-                            href="/{{ ph.id }}#news"
-                            class="btn btn-danger">Удалить</a>
-                    {% endif %}
-                    {% endif %}</div>
+                                href="/{{ ph.id }}#news"
+                                class="btn btn-danger">Удалить</a>
+                        {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
-        </h3>
         {% endfor %}
+        </h3>
     </div>
     <br><br><br>
     <div class="text" align="center" id="report"><h1 align="center">Отчет Правления, отчет
@@ -112,42 +137,44 @@
         отчет об исполнении сметы за 2020-2021 год</h1>
     </div>
     <br><br>
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            {% for image in images %}
-            {% if image != "" %}
-            <button type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide-to="{{ loop.index0 }}"
-                    {% if loop.first %} class="active" aria-current="true" {% endif %}
-                    aria-label="Slide {{ loop.index }}"></button>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class="carousel-inner">
-            {% for image in images %}
-            {% if image != "" %}
-            <div class="carousel-item{% if loop.first %} active{% endif %}">
-                <a href="#img{{ image }}">
-                    <img class="test" src="static/img/{{ image }}.png"></a>
+    <div class="text" align="center">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for image in images %}
+                {% if image != "" %}
+                <button type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="{{ loop.index0 }}"
+                        {% if loop.first %} class="active" aria-current="true" {% endif %}
+                        aria-label="Slide {{ loop.index }}"></button>
+                {% endif %}
+                {% endfor %}
             </div>
-            <a href="#report" class="lightbox" id="img{{ image }}">
-                <span style="background-image: url('/static/img/{{ image }}.png')"></span>
-            </a>
-            {% endif %}
-            {% endfor %}
+            <div class="carousel-inner">
+                {% for image in images %}
+                {% if image != "" %}
+                <div class="carousel-item{% if loop.first %} active{% endif %}">
+                    <a href="#img{{ image }}">
+                        <img class="test" src="static/img/{{ image }}.png"></a>
+                </div>
+                <a href="#report" class="lightbox" id="img{{ image }}">
+                    <span style="background-image: url('/static/img/{{ image }}.png')"></span>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" style="width:25%" type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" style="width:25%" type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" style="width:25%" type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" style="width:25%" type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
     <br><br>
     <div class="text" align="center" id="docs"><h1 align="center">Документы СНТ</h1>

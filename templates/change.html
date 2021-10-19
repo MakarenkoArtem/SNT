@@ -38,7 +38,16 @@
         {% if err %}
         <div class="alert alert-danger" role="alert"><h2 align="right"><font color="red">{{ err
             }}</font></h2></div>
-        {% endif %}<p>
+        {% endif %}
+        <p>
+            {{ form.main_event.label }}<br>
+            {{ form.main_event(class="form-control", text="a") }}<br>
+            {% for error in form.main_event.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+            {% endfor %}
+        </p></p>
+        <p>
         <input class="form" id="checkbox1" name="checkbox1" type="checkbox"> Изменить:
             {{ form.images.label }}<br>
             {{ form.images(class="form-control-file") }}<br>

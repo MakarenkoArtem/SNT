@@ -10,6 +10,7 @@ class Site(SqlAlchemyBase, SerializerMixin):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     #author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
+    main_event = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
     text = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
     images = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
     docs_image = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")

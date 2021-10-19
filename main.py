@@ -100,9 +100,7 @@ def edit_event(event):  # форма для регистрации
         # site = db_sess.query(Site).filter(Site.id == 1).one()
     except sqlalchemy.orm.exc.NoResultFound:
         return redirect('/')
-    print(1)
     if form.validate_on_submit():
-        print(2)
         if "checkbox1" in list(dict(request.form).keys()):
             [remove(f"event_{i}.png") for i in event.images.split(", ")]
             num_img = max([int(i[6:].split(".")[0]) for i in listdir("static/img") if
@@ -130,7 +128,10 @@ def edit_event(event):  # форма для регистрации
 def del_event(event=-1):  # форма для регистрации
     db_sess = db_session.create_session()
     site = db_sess.query(Site).filter(User.id == 1).one()
-    site.text = ", ".join([i for i in site.text.split(", ") if i != str(event)])
+    if event:
+        site.text = ", ".join([i for i in site.text.split(", ") if i != str(event)])
+    else:
+        site.main_event = ""
     db_sess.commit()
     return redirect('/#news')
 
@@ -170,7 +171,7 @@ def main_list(event=-1):  # форма для регистрации
     site.text = ", ".join(s)
     db_sess.commit()
     print([i.split(";") for i in site.images.split(',')])
-    return render_template('base.html', event_del=event, admin=admin,
+    return render_template('base.html', event_del=event, admin=admin, main_event=site.main_event,
                            text=text, event_images=[i.images.split(", ")[:3] for i in text],
                            images=[i.split(";") for i in site.images.split(',')][0],
                            docs_image=[i.split(";") for i in site.docs_image.split(',')], oplata_image=[i.split(";") for i in site.oplata_image.split(',')],
@@ -201,6 +202,7 @@ def add():  # форма для добавления теста
         db_sess.commit()
         site = db_sess.query(Site).filter(Site.id == 1).one()
     if form.validate_on_submit():
+        site.main_event = form.main_event.data
         del_imgs = []
         if "checkbox1" in list(dict(request.form).keys()):
             site.images, del_imgs = load_images(form.images.data, "im_", site.images, del_imgs)
@@ -217,6 +219,7 @@ def add():  # форма для добавления теста
         db_sess.commit()
         [remove(f"static/img/{i}") for i in del_imgs]
         return redirect('/')
+    form.main_event.data = site.main_event
     form.oplata_text.data = site.oplata_text
     form.dolgi_text.data = site.dolgi_text
     return render_template('change.html', form=form)
