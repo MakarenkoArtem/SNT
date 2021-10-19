@@ -66,31 +66,31 @@
             объявлений</big></b></h1><br></div>
         <!--h2 align="center">Уважаемые садоводы!</h2-->
         <h3 align="left">
-        {% if main_event != "" %}
+            {% if main_event != "" %}
             <div class="alert alert-danger" id="content" role="alert"><span style="color:#FF0000">!!! </span>
-            {{ main_event }}
-            <br>
-            {% if admin %}
-            <div style="float: center; position: relative;"><a
-                    href="/change"
-                    class="btn btn-warning">Редактировать
-            </a>
-                {% if event_del == 0 %}<a
-                        href="/del/0"
-                        class="btn btn-danger">Точно удалить</a>
-                <!--div style="float: center; position: relative; margin-right: 5px"--><a
-                        href="/#news"
-                        class="btn btn-primary">Отмена</a>
-                {% else %}
-                <a
-                        href="/0#news"
-                        class="btn btn-danger">Удалить</a>
+                {{ main_event }}
+                <br>
+                {% if admin %}
+                <div style="float: center; position: relative;"><a
+                        href="/change"
+                        class="btn btn-warning">Редактировать
+                </a>
+                    {% if event_del == 0 %}<a
+                            href="/del/0"
+                            class="btn btn-danger">Точно удалить</a>
+                    <!--div style="float: center; position: relative; margin-right: 5px"--><a
+                            href="/#news"
+                            class="btn btn-primary">Отмена</a>
+                    {% else %}
+                    <a
+                            href="/0#news"
+                            class="btn btn-danger">Удалить</a>
+                    {% endif %}
+                </div>
                 {% endif %}
             </div>
             {% endif %}
-        </div>
-        {% endif %}
-        {% for ph in text %}
+            {% for ph in text %}
             {% if ph.znach %}
             <div class="alert alert-warning" id="content" role="alert"><span style="color:#FF0000">! </span>
                 {% else %}
@@ -128,7 +128,7 @@
                         {% endif %}
                     </div>
                 </div>
-        {% endfor %}
+                {% endfor %}
         </h3>
     </div>
     <br><br><br>
@@ -285,7 +285,9 @@
     <h7><br></h7>
     {% endfor %}
     <div class="text" align="center">
-        <h2 style="margin-left: 25px;" align="top">{{ oplata_text }}</h2>
+        {% for opl in oplata_text.split("\n") %}
+        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>
+        {% endfor %}
     </div>
     <br><br><br>
     <div class="text" align="center" id="dolgi"><h1 align="center">Долги по оплате членских
@@ -294,7 +296,11 @@
             <img class="img" src="static/img/{{ dolgi_image }}.png" width="100%"></td>
         </a>-->
         <br>
-        <h2 style="widtht: 75%;">{{ dolgi_text }}</h2>
+        <h2 style="widtht: 75%;" align="left">
+            {% for opl in dolgi_text.split("\n") %}
+            <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>
+            {% endfor %}
+        </h2>
         <!--{% endif %}-->
     </div>
     <!--<a href="#dolgi" class="lightbox" id="img{{ dolgi_image }}">
