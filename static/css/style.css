@@ -21,19 +21,20 @@
         height: 300px
     }
     .text{
-        width: 90%;
+        font-size: 12pt;
+        width: 95%;
     }
     .first_buttons {
         font-size: 10pt;
         top: 40px;
-        width: 150px;
+        width: 100px;
         height: 40px;
         /*margin-left: 50%;*/
-        margin-right: 35%;
+        margin-right: 0%;
         margin-top: 5px;
     }
     .title {
-        font-size: 18pt;
+        font-size: 28pt;
         top: 80px;
     }
     .top-img {
@@ -68,6 +69,7 @@
         height: 450px
     }
     .text{
+        font-size: 14pt;
         width: 70%;
     }
     .first_buttons {
@@ -115,7 +117,8 @@
         height: 600px
     }
     .text{
-        width: 900px;
+        font-size: 20pt;
+        width: 50%;
     }
     .first_buttons {
         font-size: 18pt;
@@ -126,7 +129,7 @@
         margin-right: 5px;
     }
     .title {
-        font-size: 33pt;
+        font-size: 73pt;
         top: 200px;
     }
     .top-img {
@@ -194,8 +197,8 @@ a{
     background-color: transparent;
 }
 .text{
-    color: #6c757d;
-    font-size: 44px;
+    color: #38393b;
+    font-size: 14px;
     font-family: 'Georgia',serif;
     line-height: 1.5;
     font-weight: 600;

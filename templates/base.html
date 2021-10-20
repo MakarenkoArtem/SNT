@@ -48,7 +48,7 @@
         </a>
     </div>
     <div align="center">
-        <h1 align="center" class="title" style="color: #00ff00;">СНТ<br> Какой-то</h1>
+        <h1 align="center" class="title" style="color: #00ff00;">СНТ Баковка4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
     </div>
 </div>
 <!--img src="{{ url_for('static', filename='img/nature.gif') }}" height="550px" width= "100%"-->
@@ -93,9 +93,9 @@
             {% for ph in text %}
             {% if ph.znach %}
             <div class="alert alert-warning" id="content" role="alert"><span style="color:#FF0000">! </span>
-                {% else %}
-                <div class="alert alert-primary" role="alert">
-                    {% endif %}
+            {% else %}
+            <div class="alert alert-primary" role="alert">
+            {% endif %}
                     {{ ph.text }}
                     {% for image in event_images[loop.index0] %}
                     {% if image != "" %}
@@ -127,8 +127,8 @@
                         {% endif %}
                         {% endif %}
                     </div>
-                </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
         </h3>
     </div>
     <br><br><br>
@@ -231,7 +231,7 @@
     <h7><br></h7>
     {% endfor %}
     <br><br><br>
-    <div class="text" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1><br>
+    <div class="unit_header" align="center" id="pays"><h1 align="center">Оплата членских взносов</h1><br>
     </div>
     <!--<table width="100%">
         <td width="50%">
@@ -285,9 +285,12 @@
     <h7><br></h7>
     {% endfor %}
     <div class="text" align="center">
+     <div align="justify">
         {% for opl in oplata_text.split("\n") %}
-        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>
+	<!--        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>  -->
+	{{ opl }}<br>
         {% endfor %}
+     </div>
     </div>
     <br><br><br>
     <div class="text" align="center" id="dolgi"><h1 align="center">Долги по оплате членских
@@ -296,11 +299,14 @@
             <img class="img" src="static/img/{{ dolgi_image }}.png" width="100%"></td>
         </a>-->
         <br>
-        <h2 style="widtht: 75%;" align="left">
+        <div class="text" align="center">
+         <div align="justify">
             {% for opl in dolgi_text.split("\n") %}
-            <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>
+            <!--        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>  -->
+            {{ opl }}<br>
             {% endfor %}
-        </h2>
+         </div>
+        </div>
         <!--{% endif %}-->
     </div>
     <!--<a href="#dolgi" class="lightbox" id="img{{ dolgi_image }}">
@@ -322,36 +328,21 @@
         <div class="text" align="center"><h2 align="center">
             ПРЕДСЕДАТЕЛЬ
             </br>
-            Surname
-            </br>
-            Name
+            Иванов Иван Иванович
             </br>
             </br>
-            Phone
+            tel: +7(999)1234567
         </h2></div>
         </br>
         <div class="text" align="center"><h2 align="center">
             БУХГАЛТЕР
             </br>
-            Surname
-            </br>
-            Name
+            Пертов Петр Петрович
             </br>
             </br>
-            Phone
+            tel: +7(999)1234567
         </h2></div>
         </br>
-        <div class="text" align="center"><h2 align="center">
-            КОМЕНДАНТ
-            </br>
-            Surname
-            </br>
-            Name
-            </br>
-            </br>
-            Phone
-        </h2>
-        </div>
     </div>
     <!--div class="button-group">
         <button class="button" data-group="cell1">1984 to 1988 (Cell 1)</button>
