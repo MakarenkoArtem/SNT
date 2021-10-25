@@ -24,11 +24,11 @@
     }
 
     .test {
-        height: 300px
+        max-height: 300px
     }
 
     .zoom_img {
-        width: 65%;
+        max-width: 65%;
     }
 
     .text {
@@ -71,8 +71,9 @@
     }
 
     .zoom_img {
-        width: 70%;
+        max-width: 70%;
     }
+
     .imag {
         max-height: 6.5vh;
     }
@@ -90,7 +91,7 @@
     }
 
     .test {
-        height: 450px
+        max-height: 450px
     }
 
     .text {
@@ -133,8 +134,9 @@
     }
 
     .zoom_img {
-        width: 75%;
+        max-width: 75%;
     }
+
     .imag {
         max-height: 7vh;
     }
@@ -152,7 +154,7 @@
     }
 
     .test {
-        height: 600px
+        max-height: 600px
     }
 
     .text {
@@ -186,6 +188,14 @@
         margin-top: 5px;
         margin-bottom: 5px;
     }
+}
+
+.test {
+    max-width: 99%;
+}
+
+.zoom_img {
+    max-height: 99%;
 }
 
 .prof_text {
