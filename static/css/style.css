@@ -1,29 +1,41 @@
-@media(min-width: 0px) and (max-width: 749px){
+@media (min-width: 0px) and (max-width: 749px) {
     .alert {
-      min-height: 80px;
+        min-height: 80px;
     }
-    .imag{
-      max-height: 6vh;
+
+    .imag {
+        max-height: 6vh;
     }
-    .test_off{
+
+    .test_off {
         width: 100%;
     }
-    .prof{
+
+    .prof {
         margin-left: 200px;
     }
-    .prof-text{
+
+    .prof-text {
         margin-left: 200px;
     }
-    .news{
+
+    .news {
         width: 85%;
     }
-    .test{
+
+    .test {
         height: 300px
     }
-    .text{
+
+    .zoom_img {
+        width: 65%;
+    }
+
+    .text {
         font-size: 12pt;
         width: 95%;
     }
+
     .first_buttons {
         font-size: 10pt;
         top: 40px;
@@ -33,14 +45,17 @@
         margin-right: 0%;
         margin-top: 5px;
     }
+
     .title {
         font-size: 28pt;
         top: 80px;
     }
+
     .top-img {
         background-height: 100%;
         height: 350px;
     }
+
     .doc-img {
         width: 24%;
         margin-left: 100px;
@@ -49,29 +64,40 @@
         margin-bottom: 5px;
     }
 }
-@media(min-width: 750px) and (max-width: 1199px){
+
+@media (min-width: 750px) and (max-width: 1199px) {
     .alert {
-      min-height: 90px;
+        min-height: 90px;
     }
-    .imag{
-      max-height: 6.5vh;
+
+    .zoom_img {
+        width: 70%;
     }
-    .test_off{
+    .imag {
+        max-height: 6.5vh;
+    }
+
+    .test_off {
         width: 90%;
     }
-    .prof{
+
+    .prof {
         margin-left: 5px;
     }
-    .news{
+
+    .news {
         width: 80%;
     }
-    .test{
+
+    .test {
         height: 450px
     }
-    .text{
+
+    .text {
         font-size: 14pt;
         width: 70%;
     }
+
     .first_buttons {
         font-size: 14pt;
         top: 50px;
@@ -81,14 +107,17 @@
         margin-right: 5px;
         margin-top: 50px;
     }
+
     .title {
         font-size: 24pt;
         top: 150px;
     }
+
     .top-img {
         background-size: 100%;
         height: 350px;
     }
+
     .doc-img {
         width: 20%;
         margin-left: 5px;
@@ -97,29 +126,40 @@
         margin-bottom: 5px;
     }
 }
-@media (min-width: 1200px){
+
+@media (min-width: 1200px) {
     .alert {
-      min-height: 95px;
+        min-height: 95px;
     }
-    .imag{
-      max-height: 7vh;
+
+    .zoom_img {
+        width: 75%;
     }
-    .test_off{
+    .imag {
+        max-height: 7vh;
+    }
+
+    .test_off {
         width: 35%;
     }
-    .prof{
+
+    .prof {
         margin-left: 5px;
     }
-    .news{
+
+    .news {
         width: 950px;
     }
-    .test{
+
+    .test {
         height: 600px
     }
-    .text{
+
+    .text {
         font-size: 20pt;
         width: 50%;
     }
+
     .first_buttons {
         font-size: 18pt;
         top: 85px;
@@ -128,14 +168,17 @@
         margin-left: 5px;
         margin-right: 5px;
     }
+
     .title {
         font-size: 73pt;
         top: 200px;
     }
+
     .top-img {
         background-size: 100%;
         height: 550px;
     }
+
     .doc-img {
         width: 20%;
         margin-left: 5px;
@@ -144,9 +187,11 @@
         margin-bottom: 5px;
     }
 }
-.prof_text{
+
+.prof_text {
     margin: 3%;
 }
+
 .news {
     padding: 1.5rem;
     margin-right: 0;
@@ -158,7 +203,8 @@
     border: solid #dee2e6;
     float: center;
 }
-.main{
+
+.main {
     margin-top: 0px;
     background-position: center center;
     background-attachment: scroll;
@@ -166,9 +212,10 @@
     background-repeat: no-repeat;
     background-size: 100%
 }
+
 .title {
     width: 60%;
-    font-family: 'Georgia',serif;
+    font-family: 'Georgia', serif;
     left: 10%;
     position: relative;
 }
@@ -180,44 +227,50 @@
     border: solid #dee2e6;
     border-width: 1px 0 0;
 }
+
 .doc-img {
 }
+
 .first_buttons {
     background-color: #7fdbac;
     border-radius: 25px;
     position: relative;
     color: #69685a;
-    font-family: 'Arial',Arial,sans-serif;
+    font-family: 'Arial', Arial, sans-serif;
     line-height: 0;
     font-weight: 600;
     border-width: 2px;
 }
-a{
+
+a {
     text-decoration: none;
     background-color: transparent;
 }
-.text{
+
+.text {
     color: #38393b;
     font-size: 14px;
-    font-family: 'Georgia',serif;
+    font-family: 'Georgia', serif;
     line-height: 1.5;
     font-weight: 600;
     background-position: center center;
     border-color: transparent;
     border-style: solid;
 }
-.1flickity-prev-next-button.previous {
+
+.1
+flickity-prev-next-button.previous {
     left: 9%;
 }
-.1flickity-prev-next-button.next {
+
+.1
+flickity-prev-next-button.next {
     right: 9%;
 }
 
-textarea.form-control{
+textarea.form-control {
     height: 200px;
 }
-
-
 
 
 /*img {
@@ -225,46 +278,47 @@ textarea.form-control{
 }*/
 
 a {
-  color: inherit;
+    color: inherit;
 }
 
 a:hover {
-  color: #bbb;
+    color: #bbb;
 }
+
 .lightbox {
-  /* Default to hidden */
-  display: none;
+    /* Default to hidden */
+    display: none;
 
-  /* Overlay entire screen */
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    /* Overlay entire screen */
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  /* A bit of padding around image */
-  padding: 1em;
+    /* A bit of padding around image */
+    padding: 1em;
 
-  /* Translucent background */
-  background: rgba(0, 0, 0, 0.8);
+    /* Translucent background */
+    background: rgba(0, 0, 0, 0.8);
 }
 
 
 .lightbox:target {
-  display: block;
+    display: block;
 }
 
 .lightbox span {
-  /* Full width and height */
-  display: block;
-  width: 100%;
-  height: 100%;
+    /* Full width and height */
+    display: block;
+    width: 100%;
+    height: 100%;
 
-  /* Size and position background image */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+    /* Size and position background image */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 
@@ -306,8 +360,9 @@ body { font-family: sans-serif; }
 }*/
 
 .input {
-  disabled: true;
+    disabled: true;
 }
+
 #checkbox1:checked ~ .form-control-file {
-  disabled: true;
+    disabled: true;
 }

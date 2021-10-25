@@ -93,9 +93,9 @@
             {% for ph in text %}
             {% if ph.znach %}
             <div class="alert alert-warning" id="content" role="alert"><span style="color:#FF0000">! </span>
-            {% else %}
-            <div class="alert alert-primary" role="alert">
-            {% endif %}
+                {% else %}
+                <div class="alert alert-primary" role="alert">
+                    {% endif %}
                     {{ ph.text }}
                     {% for image in event_images[loop.index0] %}
                     {% if image != "" %}
@@ -127,8 +127,8 @@
                         {% endif %}
                         {% endif %}
                     </div>
-            </div>
-            {% endfor %}
+                </div>
+                {% endfor %}
         </h3>
     </div>
     <br><br><br>
@@ -137,7 +137,7 @@
         отчет об исполнении сметы за 2020-2021 год</h1>
     </div>
     <br><br>
-    <div class="text" align="center">
+    <a href="/" id="test">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 {% for image in images %}
@@ -156,9 +156,18 @@
                     <a href="#img{{ image }}">
                         <img class="test" src="static/img/{{ image }}.png"></a>
                 </div>
-                <a href="#report" class="lightbox" id="img{{ image }}">
-                    <span style="background-image: url('/static/img/{{ image }}.png')"></span>
-                </a>
+                <div class="lightbox" id="img{{ image }}">
+                    <a href="#img{{ images[loop.index0 - 1] }}">
+                        <span class="carousel-control-prev-icon"
+                              style="width: 10%; height: 10%; left: 5%; display: inline-block"
+                              aria-hidden="true"></span></a>
+                    <a href="#report">
+                        <!--span align="center" style="background-image: url('/static/img/{{ image }}.png'); display: inline-block; background-size: 60%"></span></a-->
+                        <img class="zoom_img" align="center" src="static/img/{{ image }}.png"></a>
+                    <a href="#img{{ images[loop.index % loop.length] }}">
+                        <span class="carousel-control-next-icon" style="width: 10%; height: 10%; display: inline-block;"
+                              aria-hidden="true"></span></a>
+                </div>
                 {% endif %}
                 {% endfor %}
             </div>
@@ -175,7 +184,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </div>
+    </a>
     <br><br>
     <div class="text" align="center" id="docs"><h1 align="center">Документы СНТ</h1>
         <br>
@@ -200,9 +209,18 @@
                     <a href="#doc{{ image }}">
                         <img class="test" src="static/img/{{ image }}.png"></a>
                 </div>
-                <a href="#docs" class="lightbox" id="doc{{ image }}">
-                    <span style="background-image: url('/static/img/{{ image }}.png')"></span>
-                </a>
+                <div class="lightbox" id="doc{{ image }}">
+                    <a href="#doc{{ images[loop.index0 - 1] }}">
+                        <span class="carousel-control-prev-icon"
+                              style="width: 10%; height: 10%; left: 5%; display: inline-block"
+                              aria-hidden="true"></span></a>
+                    <a href="#docs">
+                        <!--span align="center" style="background-image: url('/static/img/{{ image }}.png'); display: inline-block; background-size: 60%"></span></a-->
+                        <img class="zoom_img" align="center" src="static/img/{{ image }}.png"></a>
+                    <a href="#doc{{ images[loop.index % loop.length] }}">
+                        <span class="carousel-control-next-icon" style="width: 10%; height: 10%; display: inline-block;"
+                              aria-hidden="true"></span></a>
+                </div>
                 {% endif %}
                 {% endfor %}
             </div>
@@ -263,9 +281,18 @@
                 <a href="#oplata{{ image }}">
                     <img class="test" src="static/img/{{ image }}.png"></a>
             </div>
-            <a href="#docs" class="lightbox" id="oplata{{ image }}">
-                <span style="background-image: url('/static/img/{{ image }}.png')"></span>
-            </a>
+            <div class="lightbox" id="oplata{{ image }}">
+                <a href="#oplata{{ images[loop.index0 - 1] }}">
+                        <span class="carousel-control-prev-icon"
+                              style="width: 10%; height: 10%; left: 5%; display: inline-block"
+                              aria-hidden="true"></span></a>
+                <a href="#pays">
+                    <!--span align="center" style="background-image: url('/static/img/{{ image }}.png'); display: inline-block; background-size: 60%"></span></a-->
+                    <img class="zoom_img" align="center" src="static/img/{{ image }}.png"></a>
+                <a href="#oplata{{ images[loop.index % loop.length] }}">
+                        <span class="carousel-control-next-icon" style="width: 10%; height: 10%; display: inline-block;"
+                              aria-hidden="true"></span></a>
+            </div>
             {% endif %}
             {% endfor %}
         </div>
@@ -285,12 +312,12 @@
     <h7><br></h7>
     {% endfor %}
     <div class="text" align="center">
-     <div align="justify">
-        {% for opl in oplata_text.split("\n") %}
-	<!--        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>  -->
-	{{ opl }}<br>
-        {% endfor %}
-     </div>
+        <div align="justify">
+            {% for opl in oplata_text.split("\n") %}
+            <!--        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>  -->
+            {{ opl }}<br>
+            {% endfor %}
+        </div>
     </div>
     <br><br><br>
     <div class="text" align="center" id="dolgi"><h1 align="center">Долги по оплате членских
@@ -300,12 +327,12 @@
         </a>-->
         <br>
         <div class="text" align="center">
-         <div align="justify">
-            {% for opl in dolgi_text.split("\n") %}
-            <!--        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>  -->
-            {{ opl }}<br>
-            {% endfor %}
-         </div>
+            <div align="justify">
+                {% for opl in dolgi_text.split("\n") %}
+                <!--        <h2 style="margin-left: 25px;" align="left">{{ opl }}</h2>  -->
+                {{ opl }}<br>
+                {% endfor %}
+            </div>
         </div>
         <!--{% endif %}-->
     </div>
